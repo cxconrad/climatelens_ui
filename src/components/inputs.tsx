@@ -14,7 +14,7 @@ const Input = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="max-w-md mx-auto bg-blue-950 p-6 rounded-lg shadow-lg space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="max-w-md mx-auto bg-blue-950 p-6 rounded-lg shadow-lg space-y-4 drop-shadow-md">
             <input
                 type="number"
                 placeholder="Breitengrad"
