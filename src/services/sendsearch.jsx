@@ -1,6 +1,6 @@
 export const sendDataToBackend = async (data) => {
     const jsonData = JSON.stringify(data, null, 2);
-    console.log("📨 Gesendete Daten:", jsonData);
+    console.log("Gesendete Daten:", jsonData);
 
     try {
         const response = await fetch("https://dein-backend.com/api/submit", {
@@ -17,7 +17,7 @@ export const sendDataToBackend = async (data) => {
         console.log("✅ Server Response:", responseData);
         return responseData;
     } catch (error) {
-        console.error("❌ Fehler beim Senden:", error);
+        console.error("Fehler beim Senden:", error);
         throw error;
     }
 };
