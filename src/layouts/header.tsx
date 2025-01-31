@@ -1,6 +1,6 @@
 import React from "react";
 
-const Header = () => {
+const Header: React.FC = () => {
     return (
         <header className="text-white py-10 text-center">
             <h1 className="text-2xl font-bold">ClimateLens</h1>

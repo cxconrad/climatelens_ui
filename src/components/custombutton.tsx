@@ -1,6 +1,10 @@
 import React from "react";
 
-const Button = ({ label }) => {
+interface ButtonProps {
+    label: string;
+}
+
+const Button: React.FC<ButtonProps> = ({ label }) => {
     return (
         <button
             type="submit"
