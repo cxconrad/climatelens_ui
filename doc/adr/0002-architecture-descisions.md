@@ -56,8 +56,8 @@ Wir verwenden folgende Technologien für das Frontend:
 
 ## Beteiligte
 
-- [Dein Name]
+- Chantal Conrad
 
 ## Datum
 
-**Januar 2025**
+**31. Januar 2025**
