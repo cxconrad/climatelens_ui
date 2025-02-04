@@ -1,6 +1,9 @@
 
 # ADR 002: Auswahl der Frontend-Technologien
 
+## Datum
+31. Januar 2025
+
 ## Status
 **Beschlossen**
 
@@ -12,29 +15,16 @@ Das Projekt ist ein kleines Universitätsprojekt, bei dem eine moderne und effiz
 - **Einfache API-Integration**: Kommunikation mit einem REST-Backend.
 
 ## Entscheidung
-Wir verwenden folgende Technologien für das Frontend:
+Wir setzen im Frontend folgende Technologien ein:
 
-- **Vite** als Build-Tool 
-- **React** als JavaScript-Framework
-- **TypeScript**
-- **Tailwind CSS**
-- **REST API**
-
-## Begründung
-- **Vite**: Sehr schnelle Entwicklungsumgebung und optimale Performance.
-- **React**: Flexibles und weit verbreitetes JavaScript-Framework für komponentenbasierte Entwicklung.
-- **TypeScript**: Verbesserte Code-Qualität durch statische Typisierung und bessere Wartbarkeit.
-- **Tailwind CSS**: Utility-First CSS-Framework für schnelles Styling ohne das Schreiben von zusätzlichen CSS-Dateien.
-- **REST API**: Vorgabe des Projekts.
+- Vite: Schnelles Build-Tool für eine effiziente Entwicklungsumgebung und optimale Performance.
+- React: Weit verbreitetes, komponentenbasiertes JavaScript-Framework für flexible UI-Entwicklung.
+- TypeScript: Statistisch typisierte Erweiterung von JavaScript zur Verbesserung der Code-Qualität und Wartbarkeit.
+- Tailwind CSS: Utility-First CSS-Framework, das schnelles Styling ermöglicht, ohne zusätzliche CSS-Dateien schreiben zu müssen.
+- REST API: Vorgabe des Projekts für die Kommunikation zwischen Client und Server.
 
 ## Konsequenzen
 - Entwickler müssen sich an den **Utility-First** Ansatz von Tailwind CSS gewöhnen.
 - Die Architektur basiert auf **Client-Side Rendering (CSR)**.
 - Die Anwendung bleibt leichtgewichtig und schnell.
-
-## Beteiligte
-- **Chantal Conrad** (Frontend Developerin)
-
-## Datum
-31. Januar 2025
 
