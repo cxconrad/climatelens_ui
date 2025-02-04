@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "maplibre-gl/dist/maplibre-gl.css";
 import Home from "./pages/home";
 import Map from "./pages/map";
 import Graph from "./pages/graph";

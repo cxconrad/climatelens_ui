@@ -1,14 +1,16 @@
 import React from "react";
 import Header from "../layouts/header";
-import Input from "../components/inputs";
+import Table from "../components/datatable";
 
-const Main = () => {
+const Table_View = () => {
+
     return (
-        <div className="flex items-center justify-center min-h-screen gap-2">
-            <Header />
-            <Input />
+        <div className="grid grid-cols-5 gap-3">
+            <div className="col-span-5 h-30 float-left"><Header /></div>
+            <div className="bg-purple-800">...</div>
+            <div className="bg-white col-span-4"><Table /></div>
         </div>
     );
 };
 
-export default Main;
+export default Table_View;
