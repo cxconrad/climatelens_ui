@@ -2,7 +2,7 @@ services:
   frontend:
     build: .
     ports:
-      - "3000:3000ss"
+      - "3000:3000"
     deploy:
       resources:
         limits:
