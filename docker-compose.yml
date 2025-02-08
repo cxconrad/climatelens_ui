@@ -2,9 +2,10 @@ services:
   frontend:
     build: .
     ports:
-      - "3000:3000"
+      - "5173:5173"
     deploy:
       resources:
         limits:
           cpus: "2"
           memory: "1GB"
+    command: sh -c "npm run dev -- --host"
