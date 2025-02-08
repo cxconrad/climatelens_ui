@@ -1,4 +1,4 @@
-FROM node:slim
+FROM node:20 as build
 # Package-Files kopieren
 COPY package.json package-lock.json ./
 
