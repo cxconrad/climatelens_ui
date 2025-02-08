@@ -4,5 +4,5 @@ COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
 RUN npm run build
-CMD ["npx", "serve", "-s", "dist"]
 EXPOSE 3000
+CMD npx serve -s dist & sleep 2 && xdg-open http://localhost:3000 && wait

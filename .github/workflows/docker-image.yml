@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     name: Build Docker Image and push to GHCR
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout the files
