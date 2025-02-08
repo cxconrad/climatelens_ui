@@ -1,5 +1,4 @@
-FROM node:20-alpine as build
-
+FROM node:slim
 # Package-Files kopieren
 COPY package.json package-lock.json ./
 
