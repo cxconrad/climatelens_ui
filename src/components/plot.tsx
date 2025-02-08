@@ -1,4 +1,5 @@
-import React, { useMemo } from "react";
+// This file is a component used in the graph page
+import React, { useMemo, useEffect } from "react";
 import Plot from "react-plotly.js";
 
 interface WeatherDatum {
@@ -49,15 +50,30 @@ interface WeatherChartProps {
 
 const getSeasonColor = (season: string, type: "min" | "max"): string => {
     const colors: Record<string, { min: string; max: string }> = {
-        winter: { min: "#00cccc", max: "#6666ff" },
-        summer: { min: "#ffa64d", max: "#ffcc00" },
-        autumn: { min: "#aa4cff", max: "#ff884d" },
-        spring: { min: "#33cc33", max: "#66ff66" },
+        "winter": { "min": "#1f77b4", "max": "#0e4d92" },
+        "summer": { "min": "#ff7f0e", "max": "#ffbb78" },
+        "autumn": { "min": "#d62728", "max": "#bcbd22" },
+        "spring": { "min": "#2ca02c", "max": "#17becf" }
     };
     return colors[season]?.[type] || "#000000";
 };
 
-const WeatherChart: React.FC<WeatherChartProps> = ({ data, selectedStation }) => {
+const plot = ({ data, selectedStation }: WeatherChartProps) => {
+    useEffect(() => {
+        if (data) {
+            const logsKey = "apiCallLogs";
+            const existingLogs = sessionStorage.getItem(logsKey);
+            const logs = existingLogs ? JSON.parse(existingLogs) : [];
+
+            logs.push({
+                timestamp: new Date().toISOString(),
+                weatherData: data,
+            });
+
+            sessionStorage.setItem(logsKey, JSON.stringify(logs));
+        }
+    }, [data]);
+
     const temperatureData: TemperatureData = useMemo(() => ({
         years: data.data.map((item) => item.year.toString()),
         maxTemperatures: data.data.map((item) => item.annual.max),
@@ -82,7 +98,6 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ data, selectedStation }) =>
         },
     }), [data]);
 
-    // Zusammenstellen der Plot-Daten für Plotly
     const plotData = useMemo(() => [
         {
             x: temperatureData.years,
@@ -90,7 +105,7 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ data, selectedStation }) =>
             type: "scatter" as const,
             mode: "lines+markers" as const,
             name: "Max Temperatur",
-            line: { color: "#ff4d4d" },
+            line: { color: "#32cd32" },
         },
         {
             x: temperatureData.years,
@@ -98,7 +113,7 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ data, selectedStation }) =>
             type: "scatter" as const,
             mode: "lines+markers" as const,
             name: "Min Temperatur",
-            line: { color: "#4db8ff" },
+            line: { color: "#0055ff" },
         },
         ...Object.entries(temperatureData.seasonalData).flatMap(
             ([season, { min, max }]) => [
@@ -123,34 +138,38 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ data, selectedStation }) =>
     ], [temperatureData]);
 
     return (
-        <div className="p-4">
+        <div className="absolute overflow-x-auto shadow-md sm:rounded-lg">
             <Plot
                 data={plotData}
                 layout={{
                     title: {
                         text: `Wetterdaten der Station ${selectedStation || "Unbekannt"}`,
-                        font: { color: "#ffffff" },
+                        font: { color: "#3e3e66" },
                     },
-                    paper_bgcolor: "#2b2b3c",
-                    plot_bgcolor: "#2b2b3c",
+                    paper_bgcolor: "#fffff",
+                    plot_bgcolor: "#fffff",
                     xaxis: {
-                        title: { text: "Jahr", font: { color: "#ffffff" } },
-                        tickfont: { color: "#ffffff" },
+                        title: { text: "Jahr", font: { color: "#3e3e66" } },
+                        tickfont: { color: "#3e3e66" },
                     },
                     yaxis: {
-                        title: { text: "Temperatur (°C)", font: { color: "#ffffff" } },
-                        tickfont: { color: "#ffffff" },
+                        title: { text: "Temperatur (°C)", font: { color: "#3e3e66" } },
+                        tickfont: { color: "#3e3e66" },
                     },
                     legend: {
-                        font: { color: "#ffffff" },
+                        orientation: "h",
+                        x: 0.5,
+                        y: -0.1,
+                        xanchor: "center",
+                        font: { color: "#3e3e66" },
                     },
-                    margin: { t: 50, l: 50, r: 50, b: 50 },
+                    margin: { t: 50, l: 50, r: 100, b: 50 },
                 }}
                 config={{ responsive: true }}
-                style={{ width: "1200px", height: "750px" }}
+                style={{ width: "1200px", height: "800px" }}
             />
         </div>
     );
 };
 
-export default WeatherChart;
+export default plot;

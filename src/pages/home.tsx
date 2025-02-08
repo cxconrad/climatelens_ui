@@ -1,7 +1,6 @@
-import React from "react";
 import Input from "../components/inputs";
 
-const Main = () => {
+const home = () => {
   return (
     <div className="min-h-screen flex flex-row items-center justify-center">
       <header className="text-white py-10 text-center all">
@@ -15,4 +14,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default home;

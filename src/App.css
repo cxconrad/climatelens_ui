@@ -46,3 +46,11 @@
 .read-the-docs {
   color: #888;
 }
+
+@layer utilities {
+  .react-plotly-plot .modebar {
+    top: auto !important;
+    bottom: 0.5rem !important;
+    right: 0.5rem !important;
+  }
+}

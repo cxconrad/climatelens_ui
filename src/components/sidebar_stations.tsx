@@ -1,3 +1,4 @@
+// This file is a component used in the map page
 import React from "react";
 import WeatherStationCard from "./stationcard";
 import { WeatherStation } from "../pages/map";
@@ -7,10 +8,10 @@ interface SidebarProps {
     loading: boolean;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ stations, loading }) => {
+const sidebar = ({ stations, loading }: SidebarProps) => {
     if (loading) {
         return (
-            <div className="p-4 bg-gray-100 w-64">
+            <div className="p-4 bg-gray-100 w-64 h-full">
                 <p>Lade Wetterstationen ...</p>
             </div>
         );
@@ -18,25 +19,24 @@ const Sidebar: React.FC<SidebarProps> = ({ stations, loading }) => {
 
     if (!stations || stations.length === 0) {
         return (
-            <div className="p-4 bg-gray-100 w-64">
+            <div className="p-4 text-white w-64 h-full">
                 <p>Keine Stationen vorhanden.</p>
             </div>
         );
     }
 
     return (
-        <div className="p-4 w-70% overflow-y-auto">
+        <div className="content-center p-8  h-full overflow-y-auto">
             {stations.map((station) => (
                 <div
                     key={station.id}
-                    className="mb-4 !bg-slate-800 rounded shadow p-4"
+                    className="mb-4 bg-slate-800 rounded shadow p-4"
                 >
                     <WeatherStationCard station={station} />
                 </div>
             ))}
         </div>
     );
-
 };
 
-export default Sidebar;
+export default sidebar;

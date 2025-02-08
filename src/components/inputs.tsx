@@ -1,21 +1,30 @@
-import { useForm } from "react-hook-form";
+// This file is a component used in the home page
+import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-const Input = () => {
+type FormData = {
+    longitude: number;
+    latitude: number;
+    radius: number;
+    stationCount: number;
+    startYear: number;
+    endYear: number;
+};
+
+const input = () => {
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm();
+    } = useForm<FormData>({
+        mode: "onChange",
+    });
 
     const navigate = useNavigate();
 
-    const onSubmit = async (data: any) => {
+    const onSubmit: SubmitHandler<FormData> = async (data) => {
         try {
-            // API-Aufruf auskommentiert:
-            // await sendDataToBackend(data);
             console.log("Daten wurden erfolgreich verarbeitet:", data);
-            // Weiterleitung zur "/map"-Route inklusive Übergabe der Daten als state
             navigate("/map", { state: data });
         } catch (error) {
             console.error("Fehler bei der API-Anfrage:", error);
@@ -32,7 +41,7 @@ const Input = () => {
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className="max-w-md mx-auto bg-blue-950 p-6 rounded-lg shadow-lg space-y-4 drop-shadow-md"
+            className="max-w-md mx-auto bg-slate-900 p-6 rounded-lg shadow-indigo-500/50 space-y-4 drop-shadow-md"
         >
             <div className="absolute top-2 right-2 group">
                 <div
@@ -56,6 +65,7 @@ const Input = () => {
                         Längengrad
                     </label>
                     <input
+                        step="any"
                         type="number"
                         placeholder="in Dezimalgrad"
                         className="w-full text-black p-2 border-white bg-white rounded-md shadow-sm focus:ring focus:ring-blue-300"
@@ -73,6 +83,7 @@ const Input = () => {
                         Breitengrad
                     </label>
                     <input
+                        step="any"
                         type="number"
                         placeholder="in Dezimalgrad"
                         className="w-full text-black p-2 border-white bg-white rounded-md shadow-sm focus:ring focus:ring-blue-300"
@@ -89,27 +100,33 @@ const Input = () => {
 
             <div className="grid grid-cols-2 gap-4">
                 <div>
+                    <label htmlFor="Radius" className="font-bold text-white">
+                        Suchradius
+                    </label>
                     <input
                         type="number"
                         placeholder="Radius in km"
                         className="w-full text-black p-2 border-white bg-white rounded-md shadow-sm focus:ring focus:ring-blue-300"
                         {...register("radius", {
                             required: "Radius erforderlich",
-                            min: 0,
-                            max: 100,
+                            min: { value: 0, message: "Radius darf nicht negativ sein" },
+                            max: { value: 100, message: "Radius darf nicht größer als 100 sein" },
                         })}
                     />
                     {errors.radius && <p className="text-red-500 text-sm">{errors.radius.message}</p>}
                 </div>
                 <div>
+                    <label htmlFor="stationcount" className="font-bold text-white">
+                        Anzahl der Stationen
+                    </label>
                     <input
                         type="number"
                         placeholder="Anzahl der Stationen"
                         className="w-full text-black p-2 border-white bg-white rounded-md shadow-sm focus:ring focus:ring-blue-300"
                         {...register("stationCount", {
                             required: "Anzahl erforderlich",
-                            min: 1,
-                            max: 100,
+                            min: { value: 1, message: "Mindestens eine Station erforderlich" },
+                            max: { value: 10, message: "Maximal 10 Stationen erlaubt" },
                         })}
                     />
                     {errors.stationCount && <p className="text-red-500 text-sm">{errors.stationCount.message}</p>}
@@ -118,8 +135,11 @@ const Input = () => {
 
             <div className="grid grid-cols-2 gap-4">
                 <div>
+                    <label htmlFor="startYear" className="font-bold text-white">
+                        Startjahr
+                    </label>
                     <input
-                        type="number"
+                        type="year"
                         placeholder="Startjahr"
                         className="w-full text-black p-2 border-white bg-white rounded-md shadow-sm focus:ring focus:ring-blue-300"
                         {...register("startYear", {
@@ -131,8 +151,11 @@ const Input = () => {
                     {errors.startYear && <p className="text-red-500 text-sm">{errors.startYear.message}</p>}
                 </div>
                 <div>
+                    <label htmlFor="endYear" className="font-bold text-white">
+                        Endjahr
+                    </label>
                     <input
-                        type="number"
+                        type="year"
                         placeholder="Endjahr"
                         className="w-full text-black p-2 border-white bg-white rounded-md shadow-sm focus:ring focus:ring-blue-300"
                         {...register("endYear", {
@@ -140,7 +163,7 @@ const Input = () => {
                             min: { value: 1900, message: "Jahr muss ≥ 1900 sein" },
                             max: { value: new Date().getFullYear(), message: "Jahr darf nicht in der Zukunft liegen" },
                             validate: (value, formValues) =>
-                                parseInt(value) >= parseInt(formValues.startYear) || "Endjahr muss nach Startjahr liegen",
+                                value >= formValues.startYear || "Endjahr muss nach Startjahr liegen",
                         })}
                         onKeyDown={handleKeyDown}
                     />
@@ -158,4 +181,4 @@ const Input = () => {
     );
 };
 
-export default Input;
+export default input;
