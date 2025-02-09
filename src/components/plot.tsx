@@ -1,6 +1,6 @@
 // This file is a component used in the graph page
 import React, { useMemo, useEffect } from "react";
-import Plot from "react-plotly.js";
+import Plot from 'react-plotly.js';
 
 interface WeatherDatum {
     year: number;
