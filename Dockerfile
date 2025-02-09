@@ -1,4 +1,4 @@
-FROM node:20 as build
+FROM node:20-alpine AS builder
 
 # Package-Files kopieren
 COPY package.json package-lock.json ./
@@ -13,7 +13,7 @@ COPY . .
 RUN npm run build
 
 # Port für Vite exponieren
-EXPOSE 3000
+EXPOSE 5173
 
 # Entwicklungsserver starten
 CMD ["npm", "run", "dev"]
