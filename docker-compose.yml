@@ -2,6 +2,7 @@ version: "3.9"
 
 services:
   frontend:
+    image: climatelens_ui-frontend:latest
     platform: linux/amd64
     ports:
       - target: 5173
