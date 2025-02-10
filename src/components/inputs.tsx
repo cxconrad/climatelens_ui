@@ -139,7 +139,7 @@ const input = () => {
                         Startjahr
                     </label>
                     <input
-                        type="year"
+                        type="number"
                         placeholder="Startjahr"
                         className="w-full text-black p-2 border-white bg-white rounded-md shadow-sm focus:ring focus:ring-blue-300"
                         {...register("startYear", {
@@ -155,7 +155,7 @@ const input = () => {
                         Endjahr
                     </label>
                     <input
-                        type="year"
+                        type="number"
                         placeholder="Endjahr"
                         className="w-full text-black p-2 border-white bg-white rounded-md shadow-sm focus:ring focus:ring-blue-300"
                         {...register("endYear", {

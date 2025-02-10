@@ -1,11 +1,9 @@
-version: "3.9"
-
 services:
   frontend:
-    image: ccnrad/climatelens_ui-frontend:latest
+    image: ccnrad/climate_lens:latest
     ports:
-      - target: 5173
-        published: 5173
+      - target: 4173
+        published: 4173
         protocol: tcp
         mode: host
     environment:

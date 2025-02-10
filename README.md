@@ -8,7 +8,6 @@ Das Backend ist unter folgendem Link vorzufinden:
 
 
 ## Anwendung starten
-docker run -p 3000:3000 ghcr.io/cxconrad/climatelens_ui:latest
 
 
 

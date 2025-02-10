@@ -4,7 +4,7 @@ export const sendDataToBackend = async (data) => {
 
     try {
         const response = await fetch("https://dein-backend.com/api/submit", {
-            method: "POST",
+            method: "GET",
             headers: { "Content-Type": "application/json" },
             body: jsonData,
         });
