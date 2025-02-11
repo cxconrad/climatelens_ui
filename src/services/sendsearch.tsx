@@ -1,23 +1,34 @@
-export const sendDataToBackend = async (data) => {
-    const jsonData = JSON.stringify(data, null, 2);
-    console.log("Gesendete Daten:", jsonData);
+import { NavigateFunction } from "react-router-dom";
 
+export interface FormData {
+    longitude: number;
+    latitude: number;
+    radius: number;
+    stationCount: number;
+    startYear: number;
+    endYear: number;
+}
+
+
+export const handleSubmitForm = async (data: FormData, navigate: NavigateFunction) => {
     try {
-        const response = await fetch("https://dein-backend.com/api/submit", {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-            body: jsonData,
-        });
+        sessionStorage.setItem("formData", JSON.stringify(data));
+
+        const response = await fetch(
+            `/api/weatherstations?lat=${data.latitude}&lon=${data.longitude}&radius=${data.radius}&stationCount=${data.stationCount}`
+        );
 
         if (!response.ok) {
-            throw new Error(`Fehler beim Senden: ${response.statusText}`);
+            throw new Error("Fehler beim Abrufen der Wetterstationen");
         }
 
-        const responseData = await response.json();
-        console.log("✅ Server Response:", responseData);
-        return responseData;
+        const stations = await response.json();
+        console.log("Wetterstationen geladen:", stations);
+
+        sessionStorage.setItem("stations", JSON.stringify(stations));
+
+        navigate("/map", { state: { ...data, stations } });
     } catch (error) {
-        console.error("Fehler beim Senden:", error);
-        throw error;
+        console.error("Fehler beim Verarbeiten des Formulars:", error);
     }
 };

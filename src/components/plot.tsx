@@ -1,5 +1,4 @@
-// This file is a component used in the graph page
-import React, { useMemo, useEffect } from "react";
+import { useMemo, useEffect } from "react";
 import Plot from 'react-plotly.js';
 
 interface WeatherDatum {
@@ -138,7 +137,7 @@ const plot = ({ data, selectedStation }: WeatherChartProps) => {
     ], [temperatureData]);
 
     return (
-        <div className="absolute overflow-x-auto shadow-md sm:rounded-lg">
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
             <Plot
                 data={plotData}
                 layout={{

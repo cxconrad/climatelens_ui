@@ -1,6 +1,5 @@
-// This file is a component used in the map page
-import React from "react";
 import { useNavigate } from "react-router-dom";
+import { fetchData } from "../services/fetchdata";
 
 interface WeatherStation {
     id: number;
@@ -8,28 +7,16 @@ interface WeatherStation {
     latitude: number;
     longitude: number;
     distance: number;
+    startYear: number;
+    endYear: number;
 }
 
-interface WeatherStationCardProps {
+interface WeatherStationCard {
     station: WeatherStation;
 }
 
-const stationcard = ({ station }: WeatherStationCardProps) => {
+function stationcard({ station }: WeatherStationCard) {
     const navigate = useNavigate();
-
-    const handleClick = async () => {
-        try {
-            const response = await fetch("http://127.0.0.1:8000/api/weatherstation1/weatherdata");
-            if (!response.ok) {
-                throw new Error("Fehler beim Abrufen der Wetterdaten");
-            }
-
-            const data = await response.json();
-            navigate("/graph", { state: { weatherData: data, station } });
-        } catch (error) {
-            console.error("Fehler:", error);
-        }
-    };
 
     return (
         <div className="station-card p-2 mb-2 text-white">
@@ -45,16 +32,13 @@ const stationcard = ({ station }: WeatherStationCardProps) => {
             <div className="content-center">
                 <button
                     className="button p-2 m-2 !bg-violet-600 text-white rounded hover:bg-blue-600"
-                    onClick={handleClick}
+                    onClick={() => fetchData(station.id, navigate, station)}
                 >
                     Wetterdaten ansehen
                 </button>
             </div>
         </div>
     );
-
-};
+}
 
 export default stationcard;
-
-

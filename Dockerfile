@@ -1,4 +1,4 @@
-# 1️⃣ Build-Image mit Node.js
+# 1Build-Image mit Node.js
 FROM node:22-alpine AS build_image
 
 # Arbeitsverzeichnis setzen

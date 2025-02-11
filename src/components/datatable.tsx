@@ -1,4 +1,3 @@
-// src/components/datatable.tsx
 import React, { useEffect, useState } from 'react';
 
 interface TemperatureRange {
@@ -15,52 +14,37 @@ export interface TemperatureEntry {
     winter: TemperatureRange;
 }
 
-interface ApiResponse {
-    station_id: number;
-    data: TemperatureEntry[];
-}
-
 interface TemperatureTableProps {
     visibleColumns: string[];
 }
 
-const datatable = ({ visibleColumns }: TemperatureTableProps) => {
+const Datatable = ({ visibleColumns }: TemperatureTableProps) => {
     const [data, setData] = useState<TemperatureEntry[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [sortColumn, setSortColumn] = useState<string>('year');
     const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
 
-    const fetchDataFromAPI = async () => {
+    useEffect(() => {
         try {
-            const response = await fetch('/api/weatherstation1/weatherdata');
-            if (!response.ok) {
-                throw new Error('Fehler beim Laden der Daten');
+            const storedData = sessionStorage.getItem("weatherData");
+
+            if (!storedData) {
+                throw new Error("Keine Wetterdaten in SessionStorage gefunden.");
             }
-            const json: ApiResponse = await response.json();
-            setData(json.data);
+
+            const parsedData = JSON.parse(storedData);
+
+            if (!parsedData || !parsedData.data) {
+                throw new Error("Wetterdaten sind ungültig oder fehlen.");
+            }
+
+            setData(parsedData.data);
         } catch (err: any) {
             setError(err.message);
         } finally {
             setLoading(false);
         }
-    };
-
-    useEffect(() => {
-        const logsKey = "apiCallLogs";
-        const logsStr = sessionStorage.getItem(logsKey);
-        if (logsStr) {
-            const logs = JSON.parse(logsStr);
-            if (Array.isArray(logs) && logs.length > 0) {
-                const latestLog = logs[logs.length - 1];
-                if (latestLog && latestLog.weatherData && latestLog.weatherData.data) {
-                    setData(latestLog.weatherData.data);
-                    setLoading(false);
-                    return;
-                }
-            }
-        }
-        fetchDataFromAPI();
     }, []);
 
     const getNestedValue = (obj: any, columnKey: string): any => {
@@ -112,9 +96,9 @@ const datatable = ({ visibleColumns }: TemperatureTableProps) => {
     ];
 
     return (
-        <div className="absolute overflow-x-auto shadow-md sm:rounded-lg">
+        <div className="absolute max-h-[800px] overflow-y-auto shadow-md sm:rounded-lg">
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <thead className="sticky top-0 z-10 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th
                             scope="col"
@@ -164,4 +148,4 @@ const datatable = ({ visibleColumns }: TemperatureTableProps) => {
     );
 };
 
-export default datatable;
+export default Datatable;

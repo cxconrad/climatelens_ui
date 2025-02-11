@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import WeatherMap from "../components/worldmap";
 import Sidebar from "../components/sidebar_stations";
+import Header from "../layouts/header";
 
 export interface WeatherStation {
     id: number;
@@ -9,6 +10,8 @@ export interface WeatherStation {
     latitude: number;
     longitude: number;
     distance: number;
+    startYear: number;
+    endYear: number;
 }
 
 export interface LocationState {
@@ -18,6 +21,7 @@ export interface LocationState {
     stationCount: number;
     startYear: number;
     endYear: number;
+    stations?: WeatherStation[];
 }
 
 const map = () => {
@@ -25,10 +29,14 @@ const map = () => {
     const location = useLocation();
     let formData = location.state as LocationState | undefined;
 
+    // Falls formData nicht im state vorhanden ist, aus sessionStorage laden
     if (!formData) {
         const storedData = sessionStorage.getItem("formData");
         if (storedData) {
             formData = JSON.parse(storedData) as LocationState;
+            console.log("Formulardaten aus sessionStorage geladen:", formData);
+        } else {
+            console.warn("Keine Formulardaten in sessionStorage gefunden.");
         }
     }
 
@@ -36,34 +44,24 @@ const map = () => {
         return <p>Keine Formulardaten vorhanden.</p>;
     }
 
-    sessionStorage.setItem("formData", JSON.stringify(formData));
+    const storedStations = sessionStorage.getItem("stations");
+    const initialStations = formData.stations || (storedStations ? JSON.parse(storedStations) : []);
 
-    const [stations, setStations] = useState<WeatherStation[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [stations, setStations] = useState<WeatherStation[]>(initialStations);
+    const [loading, setLoading] = useState<boolean>(!initialStations.length);
 
     useEffect(() => {
-        fetch(
-            `/api/weatherstations?lat=${formData.latitude}&lon=${formData.longitude}&radius=${formData.radius}`
-        )
-            .then((response) => response.json())
-            .then((data: WeatherStation[]) => {
-                console.log("API-Daten:", data);
-                setStations(data);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.error("Fehler beim Laden der Wetterstationen:", error);
-                setLoading(false);
-            });
-    }, [formData.latitude, formData.longitude, formData.radius]);
+        if (!stations.length) {
+            console.warn("Keine Wetterstationen in sessionStorage gefunden.");
+            setLoading(false);
+        } else {
+            console.log("Wetterstationen erfolgreich aus sessionStorage geladen.");
+        }
+    }, []);
 
     return (
         <div className="h-screen flex flex-col">
-            <header className="text-white p-5">
-                <h1 className="text-5xl font-bold">ClimateLens</h1>
-                <p className="mt-2 text-lg">Wetterstationen finden - Trends entdecken</p>
-            </header>
-
+            <Header />
             <div className="content-center flex flex-1 h-full overflow-hidden">
                 <div className="w-1/4 p-4 h-full overflow-y-auto">
                     <button

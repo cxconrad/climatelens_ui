@@ -1,5 +1,3 @@
-// This file is a component used in the map page
-import React from "react";
 import WeatherStationCard from "./stationcard";
 import { WeatherStation } from "../pages/map";
 

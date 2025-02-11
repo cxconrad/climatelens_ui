@@ -1,7 +1,7 @@
-// src/pages/Table.tsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import TemperatureTable from '../components/datatable';
+import Header from '../layouts/header';
 
 const table = () => {
     const navigate = useNavigate();
@@ -51,11 +51,8 @@ const table = () => {
     };
 
     return (
-        <div className="h-screen flex flex-col">
-            <header className="text-white p-5">
-                <h1 className="text-5xl font-bold">ClimateLens</h1>
-                <p className="mt-2 text-lg">Wetterstationen finden - Trends entdecken</p>
-            </header>
+        <div className="h-screen overflow-y-auto flex flex-col">
+            <Header />
 
             <div className="flex flex-1">
                 <aside className="w-1/4 p-4 overflow-y-auto text-white">
@@ -66,10 +63,13 @@ const table = () => {
                         Zurück
                     </button>
                     <div className="bg-slate-800 content-center p-5">
-                        <div className="text-xl font-bold">{state.station?.name}</div>
+                        <div className="text-2xl font-bold">
+                            {state.station?.name ?? "Unbekannte Station"}
+                        </div>
                         <p className="mt-2">
                             <strong>Koordinaten: </strong>
-                            {state.station?.latitude}° N, {state.station?.longitude}° E
+                            <p> <strong>Latitude:</strong>{state.station?.latitude}</p>
+                            <p> <strong>Longitude:</strong>{state.station?.longitude}</p>
                         </p>
                         <p>
                             <strong>Entfernung: </strong>
@@ -101,9 +101,12 @@ const table = () => {
                     </div>
                 </aside>
 
-                <main className="flex-1">
-                    <TemperatureTable visibleColumns={selectedColumns} />
+                <main className="flex-1 p-4 h-full">
+                    <div className="max-h-3/4 overflow-y-auto">
+                        <TemperatureTable visibleColumns={selectedColumns} />
+                    </div>
                 </main>
+
             </div>
         </div>
     );

@@ -1,10 +1,8 @@
-import React from "react";
-
-const Header: React.FC = () => {
+const Header = () => {
     return (
-        <header className="text-white py-10 text-center all">
-            <h1 className="text-2xl font-bold">ClimateLens</h1>
-            <h2 className="text-lg mt-2">Wetterstationen finden - Trends entdecken</h2>
+        <header className="text-white p-5">
+            <p className="text-8xl font-bold">ClimateLens</p>
+            <p className="mt-2 text-lg">Wetterstationen finden - Trends entdecken</p>
         </header>
     );
 };

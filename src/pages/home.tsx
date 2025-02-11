@@ -1,5 +1,4 @@
 import Input from "../components/inputs";
-
 const home = () => {
   return (
     <div className="min-h-screen flex flex-row items-center justify-center">
