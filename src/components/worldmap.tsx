@@ -83,7 +83,7 @@ function worldmap({ formData, loading }: WeatherMapProps) {
                 const popup = new maplibregl.Popup({ offset: 25 }).setHTML(popupContent);
 
                 new maplibregl.Marker({ color: "red" })
-                    .setLngLat([station.latitude, station.longitude])
+                    .setLngLat([station.longitude, station.latitude])
                     .setPopup(popup)
                     .addTo(mapInstance.current!);
             });

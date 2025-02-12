@@ -10,10 +10,15 @@ export default defineConfig({
   server: {
     port: 4173,
     proxy: {
-      '/api': {
-        target: 'http://127.0.0.1:8000',
+      '/stations-query': {
+        target: 'http://localhost:8000',
         changeOrigin: true,
-        secure: false,
+        secure: false
+      },
+      '/station/data': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        secure: false
       }
     }
   }

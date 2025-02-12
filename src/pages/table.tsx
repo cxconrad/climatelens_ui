@@ -38,7 +38,7 @@ const table = () => {
     const [selectedColumns, setSelectedColumns] = useState<string[]>(allColumns);
 
     const handleBack = () => {
-        navigate("/graph", { state });
+        navigate("/plot", { state });
     };
 
 

@@ -31,7 +31,7 @@ export interface WeatherApiResponse {
 }
 
 interface TemperatureData {
-    years: string[];
+    years: number[];
     maxTemperatures: number[];
     minTemperatures: number[];
     seasonalData: {
@@ -74,7 +74,7 @@ const plot = ({ data, selectedStation }: WeatherChartProps) => {
     }, [data]);
 
     const temperatureData: TemperatureData = useMemo(() => ({
-        years: data.data.map((item) => item.year.toString()),
+        years: data.data.map(item => item.year),
         maxTemperatures: data.data.map((item) => item.annual.max),
         minTemperatures: data.data.map((item) => item.annual.min),
         seasonalData: {
@@ -150,6 +150,8 @@ const plot = ({ data, selectedStation }: WeatherChartProps) => {
                     xaxis: {
                         title: { text: "Jahr", font: { color: "#3e3e66" } },
                         tickfont: { color: "#3e3e66" },
+                        tickmode: "array",                    // Array-Modus aktivieren
+                        tickvals: temperatureData.years,      // Nur die vorhandenen Jahre anzeigen
                     },
                     yaxis: {
                         title: { text: "Temperatur (°C)", font: { color: "#3e3e66" } },

@@ -22,7 +22,7 @@ export const fetchData = async (
             return;
         }
 
-        const apiUrl = `http://127.0.0.1:8000/api/weatherstation/${stationId}/weatherdata?start=${startDate}&end=${endDate}`;
+        const apiUrl = `/station/data?stationId=${stationId}&startYear=${startDate}&endYear=${endDate}`;
         const response = await fetch(apiUrl);
 
         if (!response.ok) {
@@ -36,7 +36,7 @@ export const fetchData = async (
 
         sessionStorage.setItem("selectedStation", JSON.stringify(station));
 
-        navigate("/graph", { state: { weatherData: data, station } });
+        navigate("/plot", { state: { weatherData: data, station } });
     } catch (error) {
         console.error("Fehler:", error);
     }

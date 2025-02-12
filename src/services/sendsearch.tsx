@@ -15,8 +15,10 @@ export const handleSubmitForm = async (data: FormData, navigate: NavigateFunctio
         sessionStorage.setItem("formData", JSON.stringify(data));
 
         const response = await fetch(
-            `/api/weatherstations?lat=${data.latitude}&lon=${data.longitude}&radius=${data.radius}&stationCount=${data.stationCount}`
+            `/stations-query?latitude=${data.latitude}&longitude=${data.longitude}&radius=${data.radius}&count=${data.stationCount}`
         );
+
+
 
         if (!response.ok) {
             throw new Error("Fehler beim Abrufen der Wetterstationen");

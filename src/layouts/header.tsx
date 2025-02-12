@@ -1,8 +1,8 @@
 const Header = () => {
     return (
         <header className="text-white p-5">
-            <p className="text-8xl font-bold">ClimateLens</p>
-            <p className="mt-2 text-lg">Wetterstationen finden - Trends entdecken</p>
+            <a href="/" className="text-5xl !text-white font-bold hover:text-inherit">ClimateLens</a>
+            <div className="mt-2 text-lg">Wetterstationen finden - Trends entdecken</div>
         </header>
     );
 };

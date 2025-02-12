@@ -29,7 +29,6 @@ const map = () => {
     const location = useLocation();
     let formData = location.state as LocationState | undefined;
 
-    // Falls formData nicht im state vorhanden ist, aus sessionStorage laden
     if (!formData) {
         const storedData = sessionStorage.getItem("formData");
         if (storedData) {

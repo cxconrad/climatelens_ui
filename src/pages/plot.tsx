@@ -30,7 +30,7 @@ const graph = () => {
                 weatherData: JSON.parse(storedWeatherData),
                 station: JSON.parse(storedStation),
             };
-            console.log("📥 Daten aus sessionStorage geladen:", state);
+            console.log("Daten aus sessionStorage geladen:", state);
         }
     }
 

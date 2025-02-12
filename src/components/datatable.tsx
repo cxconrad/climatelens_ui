@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface TemperatureRange {
     min: number;
@@ -48,8 +48,10 @@ const Datatable = ({ visibleColumns }: TemperatureTableProps) => {
     }, []);
 
     const getNestedValue = (obj: any, columnKey: string): any => {
-        return columnKey.split('.').reduce((o, key) => (o ? o[key] : undefined), obj);
+        const value = columnKey.split('.').reduce((o, key) => (o ? o[key] : undefined), obj);
+        return value !== undefined && value !== null ? value : "-";
     };
+
 
     const handleSort = (column: string) => {
         const newSortOrder = sortColumn === column && sortOrder === 'asc' ? 'desc' : 'asc';
@@ -137,8 +139,9 @@ const Datatable = ({ visibleColumns }: TemperatureTableProps) => {
                                 .filter(col => visibleColumns.includes(col.key))
                                 .map(col => (
                                     <td key={col.key} className="px-4 py-3 text-black">
-                                        {getNestedValue(entry, col.key)}°C
+                                        {getNestedValue(entry, col.key) !== "-" ? `${getNestedValue(entry, col.key)}°C` : "-"}
                                     </td>
+
                                 ))}
                         </tr>
                     ))}
