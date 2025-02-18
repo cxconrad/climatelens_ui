@@ -98,7 +98,7 @@ const Datatable = ({ visibleColumns }: TemperatureTableProps) => {
     ];
 
     return (
-        <div className="absolute max-h-[800px] overflow-y-auto shadow-md sm:rounded-lg">
+        <div className="absolute h-4/5 overflow-y-auto shadow-md sm:rounded-lg">
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead className="sticky top-0 z-10 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>

@@ -1,136 +1,212 @@
+// Imports
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { FieldError, UseFormRegisterReturn } from "react-hook-form";
 import { handleSubmitForm, FormData } from "../services/sendsearch";
 
-const input = () => {
+// Validierungsregeln für das Formular 
+const validationRules = {
+    latitude: {
+        required: "Breitengrad erforderlich",
+        min: { value: -90, message: "Breitengrad muss zwischen -90 und 90 liegen" },
+        max: { value: 90, message: "Breitengrad muss zwischen -90 und 90 liegen" },
+    },
+    longitude: {
+        required: "Längengrad erforderlich",
+        min: { value: -180, message: "Längengrad muss zwischen -180 und 180 liegen" },
+        max: { value: 180, message: "Längengrad muss zwischen -180 und 180 liegen" },
+    },
+    radius: {
+        required: "Radius erforderlich",
+        max: { value: 100, message: "Radius darf maximal 100km sein." },
+    },
+    stationCount: {
+        required: "Anzahl erforderlich",
+        max: { value: 10, message: "Station Count darf maximal 10 sein" },
+    },
+    startYear: {
+        required: "Startjahr erforderlich",
+        min: { value: 1900, message: "Startdatum muss mindestens 1900 sein" },
+        max: { value: 2024, message: "Startdatum darf maximal 2024 sein" },
+        validate: (value: number) =>
+            /^\d{4}$/.test(value.toString()) || "Startjahr muss genau 4-stellig sein",
+    },
+    endYear: {
+        required: "Endjahr erforderlich",
+        min: { value: 1900, message: "Enddatum muss mindestens 1900 sein" },
+        max: { value: 2024, message: "Enddatum darf nur 2024 oder kleiner sein" },
+        validate: (value: number, formValues: FormData) =>
+            (/^\d{4}$/.test(value.toString()) && value >= formValues.startYear) ||
+            "Enddatum muss 4-stellig sein und nach dem Startjahr liegen",
+    },
+};
+
+// Input-Komponente
+interface FormInputProps {
+    label: string;
+    type: string;
+    placeholder: string;
+    register: UseFormRegisterReturn;
+    validation: any;
+    error?: FieldError;
+    steps?: number | string;
+    maxLength?: number;
+}
+
+const FormInput = ({
+    label,
+    type,
+    placeholder,
+    register,
+    validation,
+    error,
+    steps,
+    maxLength,
+}:
+    FormInputProps) => (
+    <div>
+        <label className="font-bold text-white">{label}</label>
+        <input
+            type={type}
+            placeholder={placeholder}
+            step={steps}
+            max={maxLength ? 9999 : undefined}
+            // onInput nur für Felder mit maxLength (z. B. Jahresfelder)
+            onInput={(e) => {
+                // Nur für Felder mit maxLength
+                const target = e.target as HTMLInputElement;
+                if (type === "number" && maxLength) {
+                    target.value = target.value.replace(/\D/g, "").slice(0, maxLength);
+                }
+            }}
+            className="w-full text-black p-2 border-white bg-white rounded-md shadow-sm focus:ring focus:ring-blue-300"
+            {...register}
+        />
+        {error && <p className="text-red-500 text-sm">{error.message}</p>}
+    </div>
+);
+
+// Komponente, die das Formular rendert
+const Input = () => {
     const {
         register,
         handleSubmit,
+        setValue,
         formState: { errors },
-    } = useForm<FormData>({
-        mode: "onChange",
-    });
+    } = useForm<FormData>({ mode: "onChange" });
 
     const navigate = useNavigate();
 
+    // Formulardaten aus dem sessionStorage laden, um bei einem Neuladen der Seite die Daten nicht zu verlieren
+    useEffect(() => {
+        const storedData = sessionStorage.getItem("formData");
+        if (storedData) {
+            const parsedData: FormData = JSON.parse(storedData);
+            console.log("Geladene Formulardaten:", parsedData);
+            Object.keys(parsedData).forEach((key) => {
+                setValue(key as keyof FormData, parsedData[key as keyof FormData]);
+            });
+        }
+    }, [setValue]);
+
+    // Formular mit den Input-Feldern
     return (
         <form
+            // Formular wird mit handleSubmit-Funktion übergeben
             onSubmit={handleSubmit((data) => handleSubmitForm(data, navigate))}
             className="max-w-md mx-auto bg-slate-900 p-6 rounded-lg shadow-indigo-500/50 space-y-4 drop-shadow-md"
         >
             <div className="grid grid-cols-2 gap-4">
-
-                <div>
-                    <label htmlFor="latitude" className="font-bold text-white">
-                        Breitengrad
-                    </label>
-                    <input
-                        step="any"
-                        type="number"
-                        placeholder="in Dezimalgrad"
-                        className="w-full text-black p-2 border-white bg-white rounded-md shadow-sm focus:ring focus:ring-blue-300"
-                        {...register("latitude", {
-                            required: "Breitengrad erforderlich",
-                            min: { value: -90, message: "Breitengrad muss zwischen -90 und 90 liegen" },
-                            max: { value: 90, message: "Breitengrad muss zwischen -90 und 90 liegen" },
-                        })}
-                    />
-                    {errors.latitude && <p className="text-red-500 text-sm">{errors.latitude.message}</p>}
-                </div>
-                <div>
-                    <label htmlFor="longitude" className="font-bold text-white">
-                        Längengrad
-                    </label>
-                    <input
-                        step="any"
-                        type="number"
-                        placeholder="in Dezimalgrad"
-                        className="w-full text-black p-2 border-white bg-white rounded-md shadow-sm focus:ring focus:ring-blue-300"
-                        {...register("longitude", {
-                            required: "Längengrad erforderlich",
-                            min: { value: -180, message: "Längengrad muss zwischen -180 und 180 liegen" },
-                            max: { value: 180, message: "Längengrad muss zwischen -180 und 180 liegen" },
-                        })}
-                    />
-                    {errors.longitude && <p className="text-red-500 text-sm">{errors.longitude.message}</p>}
-                </div>
+                <FormInput
+                    label="Breitengrad"
+                    type="text" // Typ ist Text, da wir Dezimalgrad mit Komma oder Punkt erlauben
+                    steps="0.000001"
+                    placeholder="in Dezimalgrad"
+                    register={register("latitude", {
+                        ...validationRules.latitude,
+                        // Wandelt z. B. "48,9978" in eine Zahl um, damit es weiterverarbeitet werden kann
+                        setValueAs: (value: any) => {
+                            if (typeof value === "string") {
+                                return parseFloat(value.replace(",", "."));
+                            }
+                            return value;
+                        },
+                    })}
+                    error={errors.latitude}
+                    validation={undefined}
+                />
+                <FormInput
+                    label="Längengrad"
+                    type="text" // Typ ist Text, da wir Dezimalgrad mit Komma oder Punkt erlauben
+                    steps="0.000001"
+                    placeholder="in Dezimalgrad"
+                    register={register("longitude", {
+                        ...validationRules.longitude,
+                        // Wandelt z. B. "13,123" in eine Zahl um, damit es weiterverarbeitet werden kann
+                        setValueAs: (value: any) => {
+                            if (typeof value === "string") {
+                                return parseFloat(value.replace(",", "."));
+                            }
+                            return value;
+                        },
+                    })}
+                    error={errors.longitude}
+                    validation={undefined}
+                />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-                <div>
-                    <label htmlFor="radius" className="font-bold text-white">
-                        Suchradius (km)
-                    </label>
-                    <input
-                        type="number"
-                        placeholder="Radius"
-                        className="w-full text-black p-2 border-white bg-white rounded-md shadow-sm focus:ring focus:ring-blue-300"
-                        {...register("radius", {
-                            required: "Radius erforderlich",
-                            max: { value: 100, message: "Radius darf maximal 100 sein" },
-                        })}
-                    />
-                    {errors.radius && <p className="text-red-500 text-sm">{errors.radius.message}</p>}
-                </div>
-                <div>
-                    <label htmlFor="stationCount" className="font-bold text-white">
-                        Anzahl der Stationen
-                    </label>
-                    <input
-                        type="number"
-                        placeholder="Anzahl"
-                        className="w-full text-black p-2 border-white bg-white rounded-md shadow-sm focus:ring focus:ring-blue-300"
-                        {...register("stationCount", {
-                            required: "Anzahl erforderlich",
-                            max: { value: 10, message: "Station Count darf maximal 10 sein" },
-                        })}
-                    />
-                    {errors.stationCount && <p className="text-red-500 text-sm">{errors.stationCount.message}</p>}
-                </div>
+                <FormInput
+                    label="Suchradius (km)"
+                    type="number"
+                    placeholder="Radius"
+                    register={register("radius", validationRules.radius)}
+                    error={errors.radius}
+                    validation={undefined}
+                />
+                <FormInput
+                    label="Anzahl der Stationen"
+                    type="number"
+                    placeholder="Anzahl"
+                    register={register("stationCount", validationRules.stationCount)}
+                    error={errors.stationCount}
+                    validation={undefined}
+                />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-                <div>
-                    <label htmlFor="startYear" className="font-bold text-white">
-                        Startjahr
-                    </label>
-                    <input
-                        type="number"
-                        placeholder="Startjahr"
-                        className="w-full text-black p-2 border-white bg-white rounded-md shadow-sm focus:ring focus:ring-blue-300"
-                        {...register("startYear", {
-                            required: "Startjahr erforderlich",
-                            min: { value: 1900, message: "Startdatum muss mindestens 1900 sein" },
-                        })}
-                    />
-                    {errors.startYear && <p className="text-red-500 text-sm">{errors.startYear.message}</p>}
-                </div>
-                <div>
-                    <label htmlFor="endYear" className="font-bold text-white">
-                        Endjahr
-                    </label>
-                    <input
-                        type="number"
-                        placeholder="Endjahr"
-                        className="w-full text-black p-2 border-white bg-white rounded-md shadow-sm focus:ring focus:ring-blue-300"
-                        {...register("endYear", {
-                            required: "Endjahr erforderlich",
-                            max: { value: 2024, message: "Enddatum darf nur 2024 oder kleiner sein" },
-                            validate: (value, formValues) =>
-                                value >= formValues.startYear || "Enddatum muss nach dem Startdatum liegen",
-                        })}
-                    />
-                    {errors.endYear && <p className="text-red-500 text-sm">{errors.endYear.message}</p>}
-                </div>
+                <FormInput
+                    label="Startjahr"
+                    type="number"
+                    placeholder="Startjahr"
+                    register={register("startYear", validationRules.startYear)}
+                    error={errors.startYear}
+                    validation={undefined}
+                    steps={1}
+                    maxLength={4}
+                />
+                <FormInput
+                    label="Endjahr"
+                    type="number"
+                    placeholder="Endjahr"
+                    register={register("endYear", validationRules.endYear)}
+                    error={errors.endYear}
+                    validation={undefined}
+                    steps={1}
+                    maxLength={4}
+                />
             </div>
 
             <button
                 type="submit"
-                className="w-full py-2 px-4 text-white !bg-purple-700 hover:!bg-purple-600 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
+                className="w-full py-2 px-4 text-white !bg-purple-700 hover:!bg-purple-600 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
+            >
                 Wetterstation suchen
             </button>
         </form>
     );
 };
 
-export default input;
+// Export der Komponente
+export default Input;

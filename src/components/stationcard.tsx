@@ -23,8 +23,8 @@ function stationcard({ station }: WeatherStationCard) {
             <div className="text-2xl font-bold">{station.name}</div>
             <div>
                 <p className="font-bold">Koordinaten:</p>
-                <p className="font-thin">L: {station.latitude}</p>
-                <p className="font-thin">B: {station.longitude}</p>
+                <p className="">B: {station.latitude}</p>
+                <p className="">L: {station.longitude}</p>
             </div>
             <p>
                 <strong>Entfernung:</strong> {station.distance} km

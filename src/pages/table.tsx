@@ -53,23 +53,21 @@ const table = () => {
     return (
         <div className="h-screen overflow-y-auto flex flex-col">
             <Header />
-
             <div className="flex flex-1">
                 <aside className="w-1/4 p-4 overflow-y-auto text-white">
                     <button
                         className="button p-2 m-2 !bg-pink-500 text-white rounded"
-                        onClick={handleBack}
-                    >
+                        onClick={handleBack}>
                         Zurück
                     </button>
-                    <div className="bg-slate-800 content-center p-5">
+                    <div className="bg-slate-800 content-center p-5 m-4">
                         <div className="text-2xl font-bold">
                             {state.station?.name ?? "Unbekannte Station"}
                         </div>
                         <p className="mt-2">
                             <strong>Koordinaten: </strong>
-                            <p> <strong>Latitude:</strong>{state.station?.latitude}</p>
-                            <p> <strong>Longitude:</strong>{state.station?.longitude}</p>
+                            <p> B: {state.station?.latitude}</p>
+                            <p> L: {state.station?.longitude}</p>
                         </p>
                         <p>
                             <strong>Entfernung: </strong>
@@ -83,7 +81,7 @@ const table = () => {
                             Spalten auswählen
                         </button>
                         {showDropdown && (
-                            <div className=" bg-white border p-2 m-2 text-gray-800">
+                            <div className="!bg-transparent p-2 m-1 text-white max-w-50">
                                 {allColumns.map(col => (
                                     <div key={col} className="flex items-center">
                                         <input

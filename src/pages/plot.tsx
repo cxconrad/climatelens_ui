@@ -1,6 +1,7 @@
-import WeatherChart, { WeatherApiResponse } from "../components/plot";
 import { useLocation, useNavigate, Navigate } from "react-router-dom";
 import Header from "../layouts/header";
+import WeatherChart, { WeatherApiResponse } from "../components/graph";
+
 
 interface Locations {
     weatherData: WeatherApiResponse;
@@ -58,14 +59,14 @@ const graph = () => {
                     <button className="p-2 m-2 !bg-pink-500 text-white rounded hover:bg-blue-600" onClick={handleBack}>
                         Zurück
                     </button>
-                    <div className="bg-slate-800 content-center p-5">
+                    <div className="bg-slate-800 content-center p-5 m-4">
                         <div className="text-2xl font-bold">
                             {state.station?.name ?? "Unbekannte Station"}
                         </div>
                         <p className="mt-2">
                             <strong>Koordinaten: </strong>
-                            <p> <strong>Latitude:</strong>{state.station?.latitude}</p>
-                            <p> <strong>Longitude:</strong>{state.station?.longitude}</p>
+                            <p> B: {state.station?.latitude}</p>
+                            <p> L: {state.station?.longitude}</p>
                         </p>
                         <p>
                             <strong>Entfernung: </strong>
@@ -80,7 +81,6 @@ const graph = () => {
                     </div>
                 </div>
 
-                {/* Wetter-Diagramm */}
                 <div className="p-4 overflow-y-auto flex">
                     <WeatherChart
                         data={state.weatherData}

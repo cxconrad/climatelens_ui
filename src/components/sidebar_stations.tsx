@@ -17,19 +17,18 @@ const sidebar = ({ stations, loading }: SidebarProps) => {
 
     if (!stations || stations.length === 0) {
         return (
-            <div className="p-4 text-white w-64 h-full">
+            <div className="p-4 font-bold text-white w-64 h-full">
                 <p>Keine Stationen vorhanden.</p>
             </div>
         );
     }
 
     return (
-        <div className="content-center p-8  h-full overflow-y-auto">
+        <div className="p-8 h-full overflow-y-scroll">
             {stations.map((station) => (
                 <div
                     key={station.id}
-                    className="mb-4 bg-slate-800 rounded shadow p-4"
-                >
+                    className="mb-4 bg-slate-800 rounded shadow p-4">
                     <WeatherStationCard station={station} />
                 </div>
             ))}

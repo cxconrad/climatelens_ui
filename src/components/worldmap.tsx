@@ -70,7 +70,7 @@ function worldmap({ formData, loading }: WeatherMapProps) {
                 paint: { "line-color": "rgba(0, 0, 255, 0.8)", "line-width": 2 },
             });
 
-            new maplibregl.Marker({ color: "blue" })
+            new maplibregl.Marker({ color: "red" })
                 .setLngLat([longitude, latitude])
                 .addTo(mapInstance.current!);
 
@@ -82,7 +82,7 @@ function worldmap({ formData, loading }: WeatherMapProps) {
 
                 const popup = new maplibregl.Popup({ offset: 25 }).setHTML(popupContent);
 
-                new maplibregl.Marker({ color: "red" })
+                new maplibregl.Marker({ color: "blue" })
                     .setLngLat([station.longitude, station.latitude])
                     .setPopup(popup)
                     .addTo(mapInstance.current!);

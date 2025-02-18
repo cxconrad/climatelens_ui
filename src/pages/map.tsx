@@ -61,18 +61,16 @@ const map = () => {
     return (
         <div className="h-screen flex flex-col">
             <Header />
-            <div className="content-center flex flex-1 h-full overflow-hidden">
-                <div className="w-1/4 p-4 h-full overflow-y-auto">
+            <div className="content-center flex h-full overflow-y-hidden">
+                <div className="w-1/4 p-4 h-full">
                     <button
                         className="button p-2 m-2 !bg-pink-500 text-white rounded hover:bg-blue-600"
-                        onClick={() => navigate("/")}
-                    >
+                        onClick={() => navigate("/")}>
                         Zurück
                     </button>
                     <Sidebar stations={stations} loading={loading} />
                 </div>
-
-                <div className="flex-1 p-4 h-full">
+                <div className="flex-1 p-4 h-full overflow-hidden">
                     <WeatherMap formData={{ ...formData, stations }} loading={loading} />
                 </div>
             </div>
