@@ -63,8 +63,7 @@ const FormInput = ({
     error,
     steps,
     maxLength,
-}:
-    FormInputProps) => (
+}: FormInputProps) => (
     <div>
         <label className="font-bold text-white">{label}</label>
         <input
@@ -72,12 +71,12 @@ const FormInput = ({
             placeholder={placeholder}
             step={steps}
             max={maxLength ? 9999 : undefined}
-            // onInput nur für Felder mit maxLength (z. B. Jahresfelder)
+            pattern="[0-9,.\-]*" // nur Ziffern, Komma, Punkt und Bindestrich erlauben
             onInput={(e) => {
-                // Nur für Felder mit maxLength
                 const target = e.target as HTMLInputElement;
-                if (type === "number" && maxLength) {
-                    target.value = target.value.replace(/\D/g, "").slice(0, maxLength);
+                target.value = target.value.replace(/[^0-9,.\-]/g, "");
+                if (maxLength) {
+                    target.value = target.value.slice(0, maxLength);
                 }
             }}
             className="w-full text-black p-2 border-white bg-white rounded-md shadow-sm focus:ring focus:ring-blue-300"
@@ -113,19 +112,17 @@ const Input = () => {
     // Formular mit den Input-Feldern
     return (
         <form
-            // Formular wird mit handleSubmit-Funktion übergeben
             onSubmit={handleSubmit((data) => handleSubmitForm(data, navigate))}
             className="max-w-md mx-auto bg-slate-900 p-6 rounded-lg shadow-indigo-500/50 space-y-4 drop-shadow-md"
         >
             <div className="grid grid-cols-2 gap-4">
                 <FormInput
                     label="Breitengrad"
-                    type="text" // Typ ist Text, da wir Dezimalgrad mit Komma oder Punkt erlauben
+                    type="text" // Textfeld um alle Regeln zu erfüllen
                     steps="0.000001"
                     placeholder="in Dezimalgrad"
                     register={register("latitude", {
                         ...validationRules.latitude,
-                        // Wandelt z. B. "48,9978" in eine Zahl um, damit es weiterverarbeitet werden kann
                         setValueAs: (value: any) => {
                             if (typeof value === "string") {
                                 return parseFloat(value.replace(",", "."));
@@ -138,12 +135,11 @@ const Input = () => {
                 />
                 <FormInput
                     label="Längengrad"
-                    type="text" // Typ ist Text, da wir Dezimalgrad mit Komma oder Punkt erlauben
+                    type="text"  // Textfeld um alle Regeln zu erfüllen
                     steps="0.000001"
                     placeholder="in Dezimalgrad"
                     register={register("longitude", {
                         ...validationRules.longitude,
-                        // Wandelt z. B. "13,123" in eine Zahl um, damit es weiterverarbeitet werden kann
                         setValueAs: (value: any) => {
                             if (typeof value === "string") {
                                 return parseFloat(value.replace(",", "."));

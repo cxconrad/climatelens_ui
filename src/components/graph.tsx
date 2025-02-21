@@ -124,12 +124,9 @@ const WeatherChart = ({ data, selectedStation }: WeatherChartProps) => {
         [data]
     );
 
-    // Berechne den initialen x-Achsenbereich basierend auf der Anzahl der Jahre (für eine bessere Darstellung)
-    const maxVisibleYears = 50;
-    const initialRange =
-        temperatureData.years.length > maxVisibleYears
-            ? [temperatureData.years[0], temperatureData.years[maxVisibleYears - 1]]
-            : undefined;
+    // Zeige nur alle 10 Jahre auf der X-Achse an
+    const filteredYears = temperatureData.years.filter(year => year % 10 === 0);
+
 
     // Erstelle die Plot-Daten für das Diagramm
     const plotData = useMemo(() => {
@@ -193,12 +190,13 @@ const WeatherChart = ({ data, selectedStation }: WeatherChartProps) => {
             paper_bgcolor: "#fffff",
             plot_bgcolor: "#fffff",
             dragmode: "pan" as const,
+            scrollZoom: true,
             xaxis: {
                 title: { text: "Jahr", font: { color: "#3e3e66" } },
                 tickfont: { color: "#3e3e66" },
                 tickmode: "array" as const,
-                tickvals: temperatureData.years,
-                ...(initialRange ? { range: initialRange } : {}),
+                tickvals: filteredYears,
+                ticktext: filteredYears.map(String),
             },
             yaxis: {
                 title: { text: "Temperatur (°C)", font: { color: "#3e3e66" } },
@@ -213,11 +211,9 @@ const WeatherChart = ({ data, selectedStation }: WeatherChartProps) => {
             },
             margin: { t: 100, l: 50, r: 100, b: 50 },
         }),
-        [temperatureData.years, selectedStation, initialRange]
+        [temperatureData.years, selectedStation, filteredYears]
     );
 
-    // Debug: Logge plotData
-    console.log("Plot Data:", plotData);
 
     return (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">

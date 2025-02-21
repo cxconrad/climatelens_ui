@@ -3,12 +3,13 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import TemperatureTable from '../components/datatable';
 import Header from '../layouts/header';
 
+// Defiition der Tabelle
 const table = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const state = location.state || {};
     const [showDropdown, setShowDropdown] = useState(false);
-
+    // Alle Spalten
     const allColumns = [
         'annual.max',
         'annual.min',
@@ -21,7 +22,7 @@ const table = () => {
         'winter.max',
         'winter.min'
     ];
-
+    // Spaltenbezeichnungen
     const columnLabels: { [key: string]: string } = {
         'annual.max': 'Max',
         'annual.min': 'Min',
@@ -35,13 +36,14 @@ const table = () => {
         'winter.min': 'Winter Min',
     };
 
+    // Anzeige der ausgewählten Spalten
     const [selectedColumns, setSelectedColumns] = useState<string[]>(allColumns);
-
+    // Zurück zur Plot Seite
     const handleBack = () => {
         navigate("/plot", { state });
     };
 
-
+    // Spalten auswählen
     const toggleColumn = (col: string) => {
         if (selectedColumns.includes(col)) {
             setSelectedColumns(selectedColumns.filter(item => item !== col));
@@ -50,6 +52,7 @@ const table = () => {
         }
     };
 
+    // Tabelle rendern
     return (
         <div className="h-screen overflow-y-auto flex flex-col">
             <Header />
@@ -110,4 +113,5 @@ const table = () => {
     );
 };
 
+// Export der Tabelle
 export default table;

@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
+// Definition von TemperatureRange und TemperatureEntry
 interface TemperatureRange {
     min: number;
     max: number;
@@ -14,44 +15,38 @@ export interface TemperatureEntry {
     winter: TemperatureRange;
 }
 
+// Definition der Props für die Komponente, damit die Spalten ausgewählt werden können
 interface TemperatureTableProps {
     visibleColumns: string[];
 }
 
+// Definition der Tabelle
 const Datatable = ({ visibleColumns }: TemperatureTableProps) => {
-    const [data, setData] = useState<TemperatureEntry[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
+    // Daten werden aus dem SessionStorage geladen
+    const [data, setData] = useState<TemperatureEntry[]>(() => {
+        const storedData = sessionStorage.getItem("weatherData");
+        if (storedData) {
+            try {
+                const parsedData = JSON.parse(storedData);
+                if (parsedData && parsedData.data) {
+                    return parsedData.data;
+                }
+            } catch (error) {
+                console.error("Fehler beim Parsen der Wetterdaten:", error);
+            }
+        }
+        return [];
+    });
+
+    const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
     const [sortColumn, setSortColumn] = useState<string>('year');
     const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
-
-    useEffect(() => {
-        try {
-            const storedData = sessionStorage.getItem("weatherData");
-
-            if (!storedData) {
-                throw new Error("Keine Wetterdaten in SessionStorage gefunden.");
-            }
-
-            const parsedData = JSON.parse(storedData);
-
-            if (!parsedData || !parsedData.data) {
-                throw new Error("Wetterdaten sind ungültig oder fehlen.");
-            }
-
-            setData(parsedData.data);
-        } catch (err: any) {
-            setError(err.message);
-        } finally {
-            setLoading(false);
-        }
-    }, []);
 
     const getNestedValue = (obj: any, columnKey: string): any => {
         const value = columnKey.split('.').reduce((o, key) => (o ? o[key] : undefined), obj);
         return value !== undefined && value !== null ? value : "-";
     };
-
 
     const handleSort = (column: string) => {
         const newSortOrder = sortColumn === column && sortOrder === 'asc' ? 'desc' : 'asc';
@@ -76,14 +71,16 @@ const Datatable = ({ visibleColumns }: TemperatureTableProps) => {
         setData(sortedData);
     };
 
+    // Wenn die Daten noch nicht geladen wurden, wird eine Ladeanimation angezeigt
     if (loading) {
         return <div>Laden...</div>;
     }
-
+    // Error handling
     if (error) {
         return <div>Fehler: {error}</div>;
     }
 
+    // Spaltennamen definieren
     const columns = [
         { key: 'annual.max', label: 'Max' },
         { key: 'annual.min', label: 'Min' },
@@ -97,6 +94,7 @@ const Datatable = ({ visibleColumns }: TemperatureTableProps) => {
         { key: 'winter.min', label: 'Winter Min' },
     ];
 
+    // Tabelle rendern
     return (
         <div className="absolute h-4/5 overflow-y-auto shadow-md sm:rounded-lg">
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -139,9 +137,10 @@ const Datatable = ({ visibleColumns }: TemperatureTableProps) => {
                                 .filter(col => visibleColumns.includes(col.key))
                                 .map(col => (
                                     <td key={col.key} className="px-4 py-3 text-black">
-                                        {getNestedValue(entry, col.key) !== "-" ? `${getNestedValue(entry, col.key)}°C` : "-"}
+                                        {getNestedValue(entry, col.key) !== "-"
+                                            ? `${getNestedValue(entry, col.key)}°C`
+                                            : "-"}
                                     </td>
-
                                 ))}
                         </tr>
                     ))}
@@ -151,4 +150,5 @@ const Datatable = ({ visibleColumns }: TemperatureTableProps) => {
     );
 };
 
+// Export der Komponente
 export default Datatable;

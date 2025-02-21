@@ -13,8 +13,6 @@ export interface FormData {
 // Funktion zum Verarbeiten des Formulars
 // Parameter: data: FormData, navigate: NavigateFunction
 // data: Formulardaten
-// navigate: Funktion zum Navigieren zur nächsten Seite (React Router)
-// Rückgabetyp: Promise<void>  (Promise, dass nichts zurückgibt)
 
 export const handleSubmitForm = async (data: FormData, navigate: NavigateFunction) => {
     try {

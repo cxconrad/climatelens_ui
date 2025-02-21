@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Import der Router-Komponenten von React Router
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Die App-Komponente definiert die Routen der Anwendung
 import Home from "./pages/home";
