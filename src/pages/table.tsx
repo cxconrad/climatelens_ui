@@ -54,7 +54,7 @@ const table = () => {
 
     // Tabelle rendern
     return (
-        <div className="h-screen overflow-y-auto flex flex-col">
+        <div className="h-screen overflow-y-auto flex flex-col overflow-x-hidden">
             <Header />
             <div className="flex flex-1">
                 <aside className="w-1/4 p-4 overflow-y-auto text-white">

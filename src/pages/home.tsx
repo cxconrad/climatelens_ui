@@ -2,7 +2,7 @@ import Input from "../components/inputs";
 
 const home = () => {
   return (
-    <div className="min-h-screen flex flex-row items-center justify-center">
+    <div className="min-h-screen flex flex-row items-center justify-center overflow-x-hidden">
       <header className="text-white py-10 text-center all">
         <div className="text-8xl font-bold">ClimateLens</div>
         <div className="text-lg mt-2">Wetterstationen finden - Trends entdecken</div>

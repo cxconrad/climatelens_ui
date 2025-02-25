@@ -1,5 +1,7 @@
 # Frontend Architecture
 
+
+
 ## Home
 Der Nutzer gelangt beim Laden der Webanwendung auf die [Home-Seite](.../src/home.tsx). In dieser ist die Eingabemask für die [Suche der Webstation](inputs.tsx) integriert. Bei Absenden der Formulardaten werden diese
 1. in der Session Storage gespeichert

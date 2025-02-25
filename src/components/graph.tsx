@@ -1,9 +1,8 @@
-// Import der Module von React 
+
 import { useMemo, useEffect } from "react";
-// Import der Plot-Komponente von Plotly
 import Plot from "react-plotly.js";
 
-// Datenstruktur für die Wetterdaten
+// Struktur der API-Antwort für die Wetterdaten
 interface WeatherData {
     year: number;
     annual: {
@@ -29,7 +28,7 @@ interface WeatherData {
 }
 
 // Datenstruktur für die Wetter-API-Antwort
-export interface WeatherApiResponse {
+export interface WeatherAPIResponse {
     station_id: number;
     name: string;
     data: WeatherData[];
@@ -50,7 +49,7 @@ interface TemperatureData {
 
 // Props für die WeatherChart-Komponente
 interface WeatherChartProps {
-    data: WeatherApiResponse;
+    data: WeatherAPIResponse;
     selectedStation?: string;
 }
 
@@ -74,7 +73,7 @@ const seasonNames: Record<string, string> = {
 };
 
 // Funktion, um Wetterdaten zu protokollieren
-const logWeatherData = (data: WeatherApiResponse) => {
+const logWeatherData = (data: WeatherAPIResponse) => {
     const logsKey = "apiCallLogs";
     const existingLogs = sessionStorage.getItem(logsKey);
     const logs = existingLogs ? JSON.parse(existingLogs) : [];
@@ -89,14 +88,12 @@ const logWeatherData = (data: WeatherApiResponse) => {
 
 // Komponente für die Wetterdaten
 const WeatherChart = ({ data, selectedStation }: WeatherChartProps) => {
-    // Logge die Daten beim Mount oder wenn sich die Daten ändern
     useEffect(() => {
         if (data) {
             logWeatherData(data);
         }
     }, [data]);
 
-    // Wetterdaten in ein lesbares Format umwandeln
     const temperatureData: TemperatureData = useMemo(
         () => ({
             years: data.data.map((item) => item.year),
@@ -124,11 +121,13 @@ const WeatherChart = ({ data, selectedStation }: WeatherChartProps) => {
         [data]
     );
 
-    // Zeige nur alle 10 Jahre auf der X-Achse an
-    const filteredYears = temperatureData.years.filter(year => year % 10 === 0);
+    // Berechne den Gesamtbereich und bestimme die Skalierung der X-Achse
+    const totalRange = Math.max(...temperatureData.years) - Math.min(...temperatureData.years);
+    const tickVals =
+        totalRange > 50
+            ? temperatureData.years.filter((year) => year % 10 === 0)
+            : temperatureData.years;
 
-
-    // Erstelle die Plot-Daten für das Diagramm
     const plotData = useMemo(() => {
         const baseTraces = [
             {
@@ -180,7 +179,6 @@ const WeatherChart = ({ data, selectedStation }: WeatherChartProps) => {
         return [...baseTraces, ...seasonalTraces];
     }, [temperatureData]);
 
-    // Layout-Definition für das Diagramm
     const layout = useMemo(
         () => ({
             title: {
@@ -195,8 +193,8 @@ const WeatherChart = ({ data, selectedStation }: WeatherChartProps) => {
                 title: { text: "Jahr", font: { color: "#3e3e66" } },
                 tickfont: { color: "#3e3e66" },
                 tickmode: "array" as const,
-                tickvals: filteredYears,
-                ticktext: filteredYears.map(String),
+                tickvals: tickVals,
+                ticktext: tickVals.map(String),
             },
             yaxis: {
                 title: { text: "Temperatur (°C)", font: { color: "#3e3e66" } },
@@ -211,9 +209,8 @@ const WeatherChart = ({ data, selectedStation }: WeatherChartProps) => {
             },
             margin: { t: 100, l: 50, r: 100, b: 50 },
         }),
-        [temperatureData.years, selectedStation, filteredYears]
+        [tickVals, selectedStation]
     );
-
 
     return (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">

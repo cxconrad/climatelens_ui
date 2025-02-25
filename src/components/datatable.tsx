@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
-// Definition von TemperatureRange und TemperatureEntry
+// Definition von TemperatureRange und TemperatureData
 interface TemperatureRange {
     min: number;
     max: number;
 }
 
-export interface TemperatureEntry {
+export interface TemperatureData {
     year: number;
     annual: TemperatureRange;
     spring: TemperatureRange;
@@ -22,8 +22,8 @@ interface TemperatureTableProps {
 
 // Definition der Tabelle
 const Datatable = ({ visibleColumns }: TemperatureTableProps) => {
-    // Daten werden aus dem SessionStorage geladen
-    const [data, setData] = useState<TemperatureEntry[]>(() => {
+    // Daten werden aus dem SessionStorage geladen, da sie davor schon beim ersten API-Call gespeichert wurden
+    const [data, setData] = useState<TemperatureData[]>(() => {
         const storedData = sessionStorage.getItem("weatherData");
         if (storedData) {
             try {
@@ -42,12 +42,12 @@ const Datatable = ({ visibleColumns }: TemperatureTableProps) => {
     const [error, setError] = useState<string | null>(null);
     const [sortColumn, setSortColumn] = useState<string>('year');
     const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
-
+    // Konstanten Funktion, damit leere Werte korrekt angeziegt werden
     const getNestedValue = (obj: any, columnKey: string): any => {
         const value = columnKey.split('.').reduce((o, key) => (o ? o[key] : undefined), obj);
         return value !== undefined && value !== null ? value : "-";
     };
-
+    // Konstanten Funktion, um die Tabelle sortiert werden kann
     const handleSort = (column: string) => {
         const newSortOrder = sortColumn === column && sortOrder === 'asc' ? 'desc' : 'asc';
         setSortColumn(column);
@@ -96,7 +96,7 @@ const Datatable = ({ visibleColumns }: TemperatureTableProps) => {
 
     // Tabelle rendern
     return (
-        <div className="absolute h-4/5 overflow-y-auto shadow-md sm:rounded-lg">
+        <div className="absolute h-4/5 overflow-y-auto sm:rounded-lg">
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead className="sticky top-0 z-10 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>

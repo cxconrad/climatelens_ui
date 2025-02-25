@@ -61,8 +61,8 @@ const map = () => {
     return (
         <div className="h-screen flex flex-col">
             <Header />
-            <div className="content-center flex h-full overflow-y-hidden">
-                <div className="w-1/4 p-4 h-full">
+            <div className="content-center flex overflow-y-hidden overflow-x-hidden">
+                <div className="w-1/4 p-4 h-12/13">
                     <button
                         className="button p-2 m-2 !bg-pink-500 text-white rounded hover:bg-blue-600"
                         onClick={() => navigate("/")}>

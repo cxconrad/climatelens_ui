@@ -24,7 +24,7 @@ const sidebar = ({ stations, loading }: SidebarProps) => {
     }
 
     return (
-        <div className="p-8 h-full overflow-y-scroll">
+        <div className="p-8 h-full overflow-y-auto">
             {stations.map((station) => (
                 <div
                     key={station.id}
