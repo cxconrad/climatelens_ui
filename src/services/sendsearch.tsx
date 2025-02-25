@@ -20,7 +20,7 @@ export const handleSubmitForm = async (data: FormData, navigate: NavigateFunctio
 
         const response = await fetch(
             `/stations-query?latitude=${data.latitude}&longitude=${data.longitude}&radius=${data.radius}&count=${data.stationCount}`,
-            { cache: "no-cache" } // erzwingt eine neue Anfrage, um den Cache zu umgehen
+            { cache: "no-store" } // erzwingt eine neue Anfrage, um den Cache zu umgehen
         );
 
         // Explizit 304 behandeln -> Windows Error wenn Backend nicht erreichbar
