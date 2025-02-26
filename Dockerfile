@@ -16,7 +16,7 @@ COPY . .
 # Build-Prozess ausführen (Vite erzeugt /dist)
 RUN npm run build
 
-# 2️⃣ Produktions-Image mit Node.js + Serve
+# Produktions-Image mit Node.js + Serve
 FROM node:22-alpine AS production_image
 
 # Arbeitsverzeichnis setzen
