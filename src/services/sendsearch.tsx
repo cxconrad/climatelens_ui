@@ -23,28 +23,24 @@ export const handleSubmitForm = async (data: FormData, navigate: NavigateFunctio
             { cache: "no-store" } // erzwingt eine neue Anfrage, um den Cache zu umgehen
         );
 
-        // Explizit 304 behandeln -> Windows Error wenn Backend nicht erreichbar
-        if (response.status === 304) {
-            throw new Error("Stationsdaten konnten nicht geladen werden. Bitte versuchen Sie es später erneut.");
-        }
-
         // Allgemeine Prüfung auf einen fehlerhaften Response-Status
         if (!response.ok) {
             throw new Error("Stationsdaten konnten nicht geladen werden. Bitte versuchen Sie es später erneut.");
         }
 
-        // Optional: Sicherstellen, dass die Antwort auch JSON enthält
+        // Windows Error wenn Backend nicht erreichbar
         const contentType = response.headers.get("Content-Type");
         if (!contentType || !contentType.includes("application/json")) {
-            throw new Error("Ungültige Antwort vom Server (kein JSON).");
+            throw new Error("Stationsdaten konnten nicht geladen werden. Bitte versuchen Sie es später erneut.");
         }
-
+        // Wenn die Antwort erfolgreich ist, werden die Wetterstationen geladen
         const stations = await response.json();
         console.log("Wetterstationen geladen:", stations);
-
+        // Die Wetterstationen werden im SessionStorage gespeichert und die Navigation zur Karte wird ausgeführt
         sessionStorage.setItem("stations", JSON.stringify(stations));
         navigate("/map", { state: { ...data, stations } });
     }
+    // Fehlerbehandlung für Entwicklung und Debugging
     catch (error) {
         console.error("Fehler beim Verarbeiten des Formulars:", error);
         if (error instanceof Error) {

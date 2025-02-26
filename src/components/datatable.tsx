@@ -97,8 +97,8 @@ const Datatable = ({ visibleColumns }: TemperatureTableProps) => {
     // Tabelle rendern
     return (
         <div className="absolute h-4/5 overflow-y-auto sm:rounded-lg">
-            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead className="sticky top-0 z-10 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <table className="w-full text-sm text-left text-gray-500">
+                <thead className="sticky top-0 z-10 text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
                         <th
                             scope="col"
@@ -125,11 +125,11 @@ const Datatable = ({ visibleColumns }: TemperatureTableProps) => {
                     {data.map(entry => (
                         <tr
                             key={entry.year}
-                            className="bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700"
+                            className="bg-white border-b border-gray-200"
                         >
                             <th
                                 scope="row"
-                                className="px-4 py-3 font-medium !text-gray-900 whitespace-nowrap dark:text-white"
+                                className="px-4 py-3 font-medium !text-gray-900 whitespace-nowrap"
                             >
                                 {entry.year}
                             </th>

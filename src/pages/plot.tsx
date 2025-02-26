@@ -1,10 +1,10 @@
 import { useLocation, useNavigate, Navigate } from "react-router-dom";
 import Header from "../layouts/header";
-import WeatherChart, { WeatherApiResponse } from "../components/graph";
+import WeatherChart, { WeatherAPIResponse } from "../components/graph";
 
 
 interface Locations {
-    weatherData: WeatherApiResponse;
+    weatherData: WeatherAPIResponse;
     station: {
         id: number;
         name: string;
@@ -59,7 +59,7 @@ const graph = () => {
                     <button className="p-2 m-2 !bg-pink-500 text-white rounded hover:bg-blue-600" onClick={handleBack}>
                         Zurück
                     </button>
-                    <div className="bg-slate-800 content-center p-5 m-4">
+                    <div className="bg-slate-800 content-center p-5 m-4 rounded">
                         <div className="text-2xl font-bold">
                             {state.station?.name ?? "Unbekannte Station"}
                         </div>

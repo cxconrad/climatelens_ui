@@ -3,11 +3,36 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import TemperatureTable from '../components/datatable';
 import Header from '../layouts/header';
 
-// Defiition der Tabelle
+
+interface Locations {
+    station: {
+        id: number;
+        name: string;
+        latitude: number;
+        longitude: number;
+        distance: number;
+        startYear: number;
+        endYear: number;
+    };
+}
+
 const table = () => {
-    const navigate = useNavigate();
     const location = useLocation();
-    const state = location.state || {};
+    const navigate = useNavigate();
+
+    let state = location.state as Locations | null;
+
+    if (!state) {
+        const storedWeatherData = sessionStorage.getItem("weatherData");
+        const storedStation = sessionStorage.getItem("selectedStation");
+
+        if (storedWeatherData && storedStation) {
+            state = {
+                station: JSON.parse(storedStation),
+            };
+            console.log("Daten aus sessionStorage geladen:", state);
+        }
+    }
     const [showDropdown, setShowDropdown] = useState(false);
     // Alle Spalten
     const allColumns = [
@@ -63,18 +88,22 @@ const table = () => {
                         onClick={handleBack}>
                         Zurück
                     </button>
-                    <div className="bg-slate-800 content-center p-5 m-4">
+                    <div className="bg-slate-800 content-center p-5 m-4 rounded">
                         <div className="text-2xl font-bold">
-                            {state.station?.name ?? "Unbekannte Station"}
+                            {state?.station?.name ?? "Unbekannte Station"}
                         </div>
                         <p className="mt-2">
                             <strong>Koordinaten: </strong>
-                            <p> B: {state.station?.latitude}</p>
-                            <p> L: {state.station?.longitude}</p>
+                            {state && (
+                                <>
+                                    <p> B: {state.station?.latitude}</p>
+                                    <p> L: {state.station?.longitude}</p>
+                                </>
+                            )}
                         </p>
                         <p>
                             <strong>Entfernung: </strong>
-                            {state.station?.distance} km
+                            {state?.station?.distance ?? "Unbekannt"} km
                         </p>
 
                         <button
