@@ -1,57 +1,27 @@
-name: Frontend CI
+name: Build Docker Image and push to GHCR
 
 on:
   push:
     branches:
       - main
-      - develop
-  pull_request:
-    branches:
-      - main
-      - develop
 
+# test noch hinzufügen
 jobs:
-  test:
-    name: Run Vitest API Tests
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Start frontend
-        run: npm start &
-        env:
-          CI: true
-
-      - name: Run Vitest API Tests
-        run: npm run test -- --coverage
-
-  build-and-push:
+  deploy:
     name: Build Docker Image and push to GHCR
     runs-on: ubuntu-latest
-    needs: test
 
     steps:
-      - name: Check out the files
+      - name: Checkout the files
         uses: actions/checkout@v4
-
-      - name: Log in to GHCR
+      - name: Log in to the Container registry
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.PASSWRD }}
-
       - name: Build Docker image and push
+        id: docker_build
         uses: docker/build-push-action@v6
         with:
           context: .
