@@ -84,7 +84,7 @@ const graph = () => {
                     </div>
                 </div>
 
-                <div className="p-4 overflow-y-auto flex">
+                <div className="flex-1 p-4 h-full overflow-hidde">
                     <WeatherChart
                         data={state.weatherData}
                         selectedStation={state.weatherData?.station_id?.toString() ?? "Unbekannt"}
