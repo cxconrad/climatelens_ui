@@ -1,4 +1,5 @@
-/* eslint-env jest */
+/* eslint-env vitest */
+import { test, expect, beforeAll, afterEach, afterAll } from 'vitest';
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import App from "../App";
 import { rest } from "msw";
