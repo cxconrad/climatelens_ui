@@ -1,6 +1,6 @@
 services:
   frontend:
-    image: ccnrad/climate_lens:latest
+    image: ghcr.io/cxconrad/climatelens_ui:latest
     ports:
       - target: 4173
         published: 4173
