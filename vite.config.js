@@ -8,18 +8,6 @@ export default defineConfig({
     react()
   ],
   server: {
-    port: 4173,
-    proxy: {
-      '/stations-query': {
-        target: 'http://localhost:8000',
-        changeOrigin: true,
-        secure: false
-      },
-      '/station/data': {
-        target: 'http://localhost:8000',
-        changeOrigin: true,
-        secure: false
-      }
-    }
+    port: 4173
   }
 })
