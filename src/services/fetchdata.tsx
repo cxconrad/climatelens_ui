@@ -27,7 +27,7 @@ export const fetchData = async (
             console.error("Start- oder Enddatum fehlt in der Session.");
             return;
         }
-        const apiUrl = `/station/data?stationId=${stationId}&startYear=${startDate}&endYear=${endDate}`;
+        const apiUrl = `http://localhost:8000/station/data?stationId=${stationId}&startYear=${startDate}&endYear=${endDate}`;
         const response = await fetch(apiUrl);
         // Error-Handling vom Frontend:
         if (!response.ok) {

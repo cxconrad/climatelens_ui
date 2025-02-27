@@ -21,7 +21,7 @@ export const handleSubmitForm = async (data: FormData, navigate: NavigateFunctio
         sessionStorage.setItem("formData", JSON.stringify(data));
 
         const response = await fetch(
-            `/stations-query?latitude=${data.latitude}&longitude=${data.longitude}&radius=${data.radius}&count=${data.stationCount}&startYear=${data.startYear}&endYear=${data.endYear}`,
+            `http://localhost:8000/stations-query?latitude=${data.latitude}&longitude=${data.longitude}&radius=${data.radius}&count=${data.stationCount}&startYear=${data.startYear}&endYear=${data.endYear}`,
             { cache: "no-store" } // erzwingt eine neue Anfrage, um den Cache zu umgehen
         );
 
