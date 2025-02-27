@@ -18,6 +18,5 @@ Folgender Service wird im Rahmen der Input-Form verwendet:
 > In unserem React/TypeScript-Code werden überwiegend Funktionskomponenten und Interfaces verwendet, während das UML-Diagramm diese Elemente als Klassen abbildet. Dadurch erscheinen etwa Methoden wie `render()` oder Zugriffsmodifizierer (`public`/`private`) formal in der UML, obwohl sie im Code als reine Funktionsrückgaben oder State-Variablen existieren.  
 > Außerdem sind einige als „Klasse“ dargestellte Strukturen in Wahrheit TypeScript-Interfaces (z. B. `FormData`), was in der UML allerdings konzeptionell abgebildet wurde, um die Beziehungen anschaulich darzustellen.
 
-Für die Veranschaulichung der Funktionsweise innerhalb der Seite und ihrer Komponenten wird folgendes Diagramm beigezogen. Dieses Diagramm lehnt sich an ein UML-Klassendiagramm an, enthält aber individuelle Anpassungen, um spezifische Aspekte der Implementierung hervorzuheben:
 
 ![Detailed](../doc/img/Home_Detailed.png)
