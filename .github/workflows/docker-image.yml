@@ -1,35 +1,44 @@
-name: CI Pipeline
+name: Frontend CI
 
 on:
   push:
     branches:
       - main
-      - dev
+      - develop
   pull_request:
+    branches:
+      - main
+      - develop
 
 jobs:
-  test-frontend:
-    name: Run Frontend Tests
+  test:
+    name: Run Vitest API Tests
     runs-on: ubuntu-latest
+
     steps:
-      - name: Check out code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Use Node
-        uses: actions/setup-node@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 18
 
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests
-        run: npm run test
+      - name: Start frontend
+        run: npm start &
+        env:
+          CI: true
+
+      - name: Run Vitest API Tests
+        run: npm run test -- --coverage
 
   build-and-push:
     name: Build Docker Image and push to GHCR
     runs-on: ubuntu-latest
-    needs: test-frontend
+    needs: test
 
     steps:
       - name: Check out the files
