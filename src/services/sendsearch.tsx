@@ -20,34 +20,37 @@ export const handleSubmitForm = async (data: FormData, navigate: NavigateFunctio
     try {
         sessionStorage.setItem("formData", JSON.stringify(data));
 
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000); 
+
         const response = await fetch(
             `http://localhost:8000/stations-query?latitude=${data.latitude}&longitude=${data.longitude}&radius=${data.radius}&count=${data.stationCount}&startYear=${data.startYear}&endYear=${data.endYear}`,
-            { cache: "no-store" } // erzwingt eine neue Anfrage, um den Cache zu umgehen
+            { cache: "no-store", signal: controller.signal } 
         );
 
-        // Allgemeine Prüfung auf einen fehlerhaften Response-Status
+        clearTimeout(timeoutId); 
+
         if (!response.ok) {
             throw new Error("Stationsdaten konnten nicht geladen werden. Bitte versuchen Sie es später erneut.");
         }
 
-        // Windows Error wenn Backend nicht erreichbar
         const contentType = response.headers.get("Content-Type");
         if (!contentType || !contentType.includes("application/json")) {
             throw new Error("Stationsdaten konnten nicht geladen werden. Bitte versuchen Sie es später erneut.");
         }
-        // Wenn die Antwort erfolgreich ist, werden die Wetterstationen geladen
+
         const stations = await response.json();
         console.log("Wetterstationen geladen:", stations);
         sessionStorage.setItem("stations", JSON.stringify(stations));
         navigate("/map", { state: { ...data, stations } });
-    }
-    // Fehlerbehandlung für Entwicklung und Debugging
-    catch (error) {
-        console.error("Fehler beim Verarbeiten des Formulars:", error);
-        if (error instanceof Error) {
-            alert(error.message);
+
+    } catch (error) {
+        if (error instanceof Error && error.name === "AbortError") {
+            console.error("Fehler: Der Request hat zu lange gedauert und wurde abgebrochen.");
+            alert("Die Anfrage hat zu lange gedauert. Bitte versuchen Sie es später erneut.");
         } else {
-            alert("Ein unbekannter Fehler ist aufgetreten");
+            console.error("Fehler beim Verarbeiten des Formulars:", error);
+            alert(error instanceof Error ? error.message : "Ein unbekannter Fehler ist aufgetreten");
         }
     }
 };
