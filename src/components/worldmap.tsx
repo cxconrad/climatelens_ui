@@ -112,7 +112,7 @@ function worldmap({ formData, loading }: WeatherMapProps) {
         });
     }, [stations]);
 
-    return <div ref={mapContainer} className="w-full h-full min-h-[500px] flex-1 p-5" />;
+    return <div ref={mapContainer} className="w-full h-full min-h-[800px] flex-1 p-5" />;
 };
 
 export default worldmap;
