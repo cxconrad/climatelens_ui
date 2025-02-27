@@ -22,7 +22,6 @@ interface TemperatureTableProps {
 
 // Definition der Tabelle
 const Datatable = ({ visibleColumns }: TemperatureTableProps) => {
-    // Daten werden aus dem SessionStorage geladen, da sie davor schon beim ersten API-Call gespeichert wurden
     const [data, setData] = useState<TemperatureData[]>(() => {
         const storedData = sessionStorage.getItem("weatherData");
         if (storedData) {
@@ -42,12 +41,14 @@ const Datatable = ({ visibleColumns }: TemperatureTableProps) => {
     const [error, setError] = useState<string | null>(null);
     const [sortColumn, setSortColumn] = useState<string>('year');
     const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
-    // Konstanten Funktion, damit leere Werte korrekt angeziegt werden
+
+    // Funktion, damit leere Werte korrekt angeziegt werden
     const getNestedValue = (obj: any, columnKey: string): any => {
         const value = columnKey.split('.').reduce((o, key) => (o ? o[key] : undefined), obj);
         return value !== undefined && value !== null ? value : "-";
     };
-    // Konstanten Funktion, um die Tabelle sortiert werden kann
+
+    // Funktion, um die Tabelle sortiert werden kann
     const handleSort = (column: string) => {
         const newSortOrder = sortColumn === column && sortOrder === 'asc' ? 'desc' : 'asc';
         setSortColumn(column);
@@ -150,5 +151,4 @@ const Datatable = ({ visibleColumns }: TemperatureTableProps) => {
     );
 };
 
-// Export der Komponente
 export default Datatable;

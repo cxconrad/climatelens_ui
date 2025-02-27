@@ -1,6 +1,12 @@
+/* 
+Wird im Formular (inputs.tsx) aufgerufen, wenn die Benutzer:in auf „Wetterstation suchen” klickt.
+Schickt die Formulardaten an das Backend (GET-Request an /stations-query).
+Speichert bei erfolgreicher Antwort die zurückgelieferten Stationen in sessionStorage.
+Leitet anschließend zur Kartenansicht (/map) weiter.
+*/
+
 import { NavigateFunction } from "react-router-dom";
 
-// Typ für die Formulardaten
 export interface FormData {
     longitude: number;
     latitude: number;
@@ -9,10 +15,6 @@ export interface FormData {
     startYear: number;
     endYear: number;
 }
-
-// Funktion zum Verarbeiten des Formulars
-// Parameter: data: FormData, navigate: NavigateFunction
-// data: Formulardaten
 
 export const handleSubmitForm = async (data: FormData, navigate: NavigateFunction) => {
     try {
@@ -36,7 +38,6 @@ export const handleSubmitForm = async (data: FormData, navigate: NavigateFunctio
         // Wenn die Antwort erfolgreich ist, werden die Wetterstationen geladen
         const stations = await response.json();
         console.log("Wetterstationen geladen:", stations);
-        // Die Wetterstationen werden im SessionStorage gespeichert und die Navigation zur Karte wird ausgeführt
         sessionStorage.setItem("stations", JSON.stringify(stations));
         navigate("/map", { state: { ...data, stations } });
     }

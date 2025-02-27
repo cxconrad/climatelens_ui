@@ -1,3 +1,8 @@
+/*  
+map.tsx lädt die Formulardaten (entweder über location.state oder aus dem sessionStorage).
+Zeigt die Karte (worldmap.tsx) mit einem Suchradius und Markern für gefundene Stationen.
+Rendert eine Sidebar (sidebar_stations.tsx) mit einzelnen StationCards (stationcard.tsx). 
+*/
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import WeatherMap from "../components/worldmap";

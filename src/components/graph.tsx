@@ -27,7 +27,6 @@ interface WeatherData {
     };
 }
 
-// Datenstruktur für die Wetter-API-Antwort
 export interface WeatherAPIResponse {
     station_id: number;
     name: string;

@@ -1,4 +1,3 @@
-// Imports
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -86,7 +85,6 @@ const FormInput = ({
     </div>
 );
 
-// Komponente, die das Formular rendert
 const Input = () => {
     const {
         register,
@@ -203,5 +201,4 @@ const Input = () => {
     );
 };
 
-// Export der Komponente
 export default Input;

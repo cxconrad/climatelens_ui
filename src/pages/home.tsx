@@ -1,3 +1,4 @@
+/* Startseite der Anwendung mit Input-Formular */
 import Input from "../components/inputs";
 
 const home = () => {

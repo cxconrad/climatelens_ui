@@ -1,4 +1,9 @@
-import { NavigateFunction } from "react-router-dom"; // Import der NavigateFunction
+/* 
+Wird aufgerufen, sobald in der Seitenleiste (stationcard.tsx) auf „Wetterdaten ansehen” geklickt wird.
+Schickt einen GET-Request an /station/data, um die Wetterdaten für die gewählte Station zu laden.
+Speichert die empfangenen Wetterdaten in sessionStorage und navigiert dann zur Plot-Seite (/plot), wo die Daten grafisch dargestellt werden.
+*/
+import { NavigateFunction } from "react-router-dom";
 
 // Funktion zum Abrufen der Wetterdaten
 export const fetchData = async (
@@ -7,10 +12,6 @@ export const fetchData = async (
     station: any
 ) => {
     try {
-        // Parameter: stationId, navigate-Funktion, station
-        // stationId: ID der ausgewählten Station
-        // navigate: Funktion zum Navigieren zur nächsten Seite
-        // station: Objekt mit Informationen zur ausgewählten Station
         const formDataString = sessionStorage.getItem("formData");
 
         if (!formDataString) {
@@ -26,7 +27,6 @@ export const fetchData = async (
             console.error("Start- oder Enddatum fehlt in der Session.");
             return;
         }
-        // API-URL für den Abruf der Wetterdaten
         const apiUrl = `/station/data?stationId=${stationId}&startYear=${startDate}&endYear=${endDate}`;
         const response = await fetch(apiUrl);
         // Error-Handling vom Frontend:

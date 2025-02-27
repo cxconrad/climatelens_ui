@@ -1,3 +1,7 @@
+/* 
+Plot.tsx lädt die Wetterdaten aus dem sessionStorage, rendert den WeatherChart (graph.tsx) 
+und bietet die Option, die Daten tabellarisch anzuzeigen.
+*/
 import { useLocation, useNavigate, Navigate } from "react-router-dom";
 import Header from "../layouts/header";
 import WeatherChart, { WeatherAPIResponse } from "../components/graph";
@@ -22,10 +26,7 @@ interface Station {
 const graph = () => {
     const location = useLocation();
     const navigate = useNavigate();
-// state wird als Locations oder null definiert
     let state = location.state as Locations | null;
-// Wenn state nicht existiert, wird überprüft, ob Daten im sessionStorage vorhanden sind
-// Wenn Daten vorhanden sind, werden sie in state gespeichert
     if (!state) {
         const storedWeatherData = sessionStorage.getItem("weatherData");
         const storedStation = sessionStorage.getItem("selectedStation");
@@ -44,19 +45,15 @@ const graph = () => {
         return <Navigate to="/map" replace />;
     }
 
-// Daten werden im sessionStorage gespeichert
     sessionStorage.setItem("selectedStation", JSON.stringify(state.station));
     sessionStorage.setItem("weatherData", JSON.stringify(state.weatherData));
-// Funktionen für die Navigation
     const handleBack = () => {
         navigate("/map");
     };
-// Funktion für die Navigation zur Tabelle
     const handleTableView = () => {
         navigate("/table", { state });
     };
 
-// Darstellung der Komponente    
     return (
         <div className="h-screen overflow-y-auto flex flex-col">
             <Header />
