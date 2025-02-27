@@ -1,7 +1,7 @@
 # Erläuterungen zur Seite "Map (Map.tsx)"
 Die Seite [Map](../src/pages/map.tsx) wird nach erfolgreichen Suche (Backend verfügbar) angezeigt. Sie dient der Anzeige der verfügbaren Stationen. Der Aufbau und die grundlegende Funktion der Seite ist wie folgt, darzustellen:
 
-![Overview](../doc/img/Map_Overview.png)
+![Overview](../doc/img/Map_Page.png)
 
 ## Verwendete Komponenten
 Hervorgehend aus der Aufbauansicht werden auf der Seite folgenden Komponenten verwendet:
@@ -14,9 +14,12 @@ Im Rahmen der Abfrage nach Wetterdaten wird folgender Service aufgerufen:
 - [Fetch Data](../src/services/fetchdata.tsx)
 
 ## Klassendiagramm
+⚠ **Hinweis zur UML-Darstellung**  
+Dieses UML-Diagramm dient zur konzeptionellen Veranschaulichung der Architektur unserer React/TypeScript-App.  
+Da wir überwiegend **Funktionskomponenten und Interfaces** verwenden, werden einige Elemente wie Methoden (`render()`) und Klassen (`class`) in der UML abstrahiert dargestellt.  
+Besonders zu beachten:  
+- TypeScript-**Interfaces** (z. B. `WeatherStation`) erscheinen als Klassen, um Relationen darzustellen.  
+- Funktionskomponenten sind in der UML als Klassen mit `render()` modelliert, da UML keine direkte Darstellung für React-Hooks bietet.  
 
-> ⚠ **Warnung**  
-> In unserem React/TypeScript-Code werden überwiegend Funktionskomponenten und Interfaces verwendet, während das UML-Diagramm diese Elemente als Klassen abbildet. Dadurch erscheinen etwa Methoden wie `render()` oder Zugriffsmodifizierer (`public`/`private`) formal in der UML, obwohl sie im Code als reine Funktionsrückgaben oder State-Variablen existieren.  
-> Außerdem sind einige als „Klasse“ dargestellte Strukturen in Wahrheit TypeScript-Interfaces (z. B. `WeatherStation`), was in der UML allerdings konzeptionell abgebildet wurde, um die Beziehungen anschaulich darzustellen.
 
-![Detail](../doc/img/Map_Detailed.png)
+![Detail](../doc/img/Map.png)
