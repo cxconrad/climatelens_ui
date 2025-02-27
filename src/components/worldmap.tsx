@@ -75,9 +75,9 @@ function worldmap({ formData, loading }: WeatherMapProps) {
                 .addTo(mapInstance.current!);
 
             stations.forEach((station) => {
-                const popupContent = `<div class="text-center">
-                    <h2 class="m-0 text-lg font-semibold">${station.name}</h2>
-                    <p class="m-0 text-sm">Entfernung: ${station.distance} km</p>
+                const popupContent = `<div className="text-center">
+                    <div class="m-0 text-lg font-semibold dark:text-black">${station.name}</div>
+                    <div class="m-0 text-sm dark:text-black">Entfernung: ${station.distance} km</div>
                 </div>`;
 
                 const popup = new maplibregl.Popup({ offset: 25 }).setHTML(popupContent);
@@ -94,23 +94,6 @@ function worldmap({ formData, loading }: WeatherMapProps) {
         };
     }, [longitude, latitude, radius, stations]);
 
-    useEffect(() => {
-        if (!mapInstance.current || !mapInstance.current.isStyleLoaded()) return;
-
-        stations.forEach((station) => {
-            const popupContent = `<div class="text-center">
-                <div class="m-0 text-lg font-semibold dark:font-black">${station.name}</div>
-                <div class="m-0 text-sm dark:font-black">Entfernung: ${station.distance} km</div>
-            </div>`;
-
-            const popup = new maplibregl.Popup({ offset: 25 }).setHTML(popupContent);
-
-            new maplibregl.Marker({ color: "red" })
-                .setLngLat([station.longitude, station.latitude])
-                .setPopup(popup)
-                .addTo(mapInstance.current!);
-        });
-    }, [stations]);
 
     return <div ref={mapContainer} className="w-full h-full min-h-[800px] flex-1 p-5" />;
 };
