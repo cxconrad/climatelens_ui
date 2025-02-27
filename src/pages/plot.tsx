@@ -62,7 +62,7 @@ const graph = () => {
                     <button className="p-2 m-2 !bg-pink-500 text-white rounded hover:bg-blue-600" onClick={handleBack}>
                         Zurück
                     </button>
-                    <div className="bg-slate-800 content-center p-5 m-4 rounded">
+                    <div className="bg-slate-800 content-center p-5 m-4 mb-4 rounded">
                         <div className="text-2xl font-bold">
                             {state.station?.name ?? "Unbekannte Station"}
                         </div>
