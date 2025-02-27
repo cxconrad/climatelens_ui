@@ -8,7 +8,7 @@ Die Nutzerinteraktion wird maßgeblich vom **App-Router** gesteuert, der das Nav
 
 
 ## Systemablauf und Datenfluss
-![Sequenz](../doc/img/Sequenz_Overview.png)
+[![Sequenz](../doc/img/Sequenz_Overview.png)](../doc/img/Sequenz_Overview.png)
 
 
 ## Pages Dokumentation
