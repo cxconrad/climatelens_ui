@@ -1,5 +1,5 @@
-import WeatherStationCard from "./stationcard";
-import { WeatherStation } from "../pages/map";
+import WeatherStationCard from "./Stationcard";
+import { WeatherStation } from "../pages/Map";
 
 interface SidebarProps {
     stations: WeatherStation[];
