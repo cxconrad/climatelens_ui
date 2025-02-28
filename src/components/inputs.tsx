@@ -26,14 +26,14 @@ const validationRules = {
     },
     startYear: {
         required: "Startjahr erforderlich",
-        min: { value: 1900, message: "Startdatum muss mindestens 1900 sein" },
+        min: { value: 1763, message: "Startdatum muss mindestens 1900 sein" },
         max: { value: 2024, message: "Startdatum darf maximal 2024 sein" },
         validate: (value: number) =>
             /^\d{4}$/.test(value.toString()) || "Startjahr muss genau 4-stellig sein",
     },
     endYear: {
         required: "Endjahr erforderlich",
-        min: { value: 1900, message: "Enddatum muss mindestens 1900 sein" },
+        min: { value: 1764, message: "Enddatum muss mindestens 1900 sein" },
         max: { value: 2024, message: "Enddatum darf nur 2024 oder kleiner sein" },
         validate: (value: number, formValues: FormData) =>
             (/^\d{4}$/.test(value.toString()) && value >= formValues.startYear) ||
