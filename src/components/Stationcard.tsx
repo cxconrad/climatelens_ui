@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { fetchData } from "../services/fetchdata";
+import { fetchData } from "../services/Fetchdata";
 
 interface WeatherStation {
     id: number;

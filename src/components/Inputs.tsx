@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { FieldError, UseFormRegisterReturn } from "react-hook-form";
-import { handleSubmitForm, FormData } from "../services/sendsearch";
+import { handleSubmitForm, FormData } from "../services/Sendsearch";
 
 // Validierungsregeln für das Formular 
 const validationRules = {
