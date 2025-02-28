@@ -6,7 +6,7 @@ interface TemperatureRange {
     max: number;
 }
 
-export interface TemperatureData {
+interface TemperatureData {
     year: number;
     annual: TemperatureRange;
     spring: TemperatureRange;
