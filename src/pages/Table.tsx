@@ -6,8 +6,8 @@ Dort kannst der Nutzer Spalten ein- oder ausblenden und die Daten sortieren.
 
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import TemperatureTable from '../components/datatable';
-import Header from '../layouts/header';
+import TemperatureTable from '../components/Datatable';
+import Header from '../layouts/Header';
 
 
 interface Locations {
