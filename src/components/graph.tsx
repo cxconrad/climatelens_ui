@@ -1,4 +1,3 @@
-
 import { useMemo, useEffect } from "react";
 import Plot from "react-plotly.js";
 
@@ -128,7 +127,7 @@ const WeatherChart = ({ data, selectedStation }: WeatherChartProps) => {
             : temperatureData.years;
 
     const plotData = useMemo(() => {
-        const baseTraces = [
+        const yearlyData = [
             {
                 x: temperatureData.years,
                 y: temperatureData.maxTemperatures,
@@ -137,6 +136,8 @@ const WeatherChart = ({ data, selectedStation }: WeatherChartProps) => {
                 name: "Max Temperatur",
                 line: { color: "#FF0000" },
                 visible: true,
+                connectgaps: false,
+
             },
             {
                 x: temperatureData.years,
@@ -146,10 +147,11 @@ const WeatherChart = ({ data, selectedStation }: WeatherChartProps) => {
                 name: "Min Temperatur",
                 line: { color: "#0000FF" },
                 visible: true,
+                connectgaps: false,
             },
         ];
 
-        const seasonalTraces = Object.entries(temperatureData.seasonalData).flatMap(
+        const seasonalData = Object.entries(temperatureData.seasonalData).flatMap(
             ([season, { min, max }]) => {
                 const seasonLabel = seasonNames[season] || season.charAt(0).toUpperCase() + season.slice(1);
                 return [
@@ -161,6 +163,7 @@ const WeatherChart = ({ data, selectedStation }: WeatherChartProps) => {
                         name: `Min Temperatur ${seasonLabel}`,
                         line: { color: getSeasonColor(season, "min") },
                         visible: "legendonly" as const,
+                        connectgaps: false,
                     },
                     {
                         x: temperatureData.years,
@@ -170,12 +173,13 @@ const WeatherChart = ({ data, selectedStation }: WeatherChartProps) => {
                         name: `Max Temperatur ${seasonLabel}`,
                         line: { color: getSeasonColor(season, "max") },
                         visible: "legendonly" as const,
+                        connectgaps: false,
                     },
                 ];
             }
         );
 
-        return [...baseTraces, ...seasonalTraces];
+        return [...yearlyData, ...seasonalData];
     }, [temperatureData]);
 
     const layout = useMemo(
