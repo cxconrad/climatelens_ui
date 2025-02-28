@@ -95,7 +95,7 @@ const Input = () => {
 
     const navigate = useNavigate();
 
-    // Formulardaten aus dem sessionStorage laden, um bei einem Neuladen der Seite die Daten nicht zu verlieren
+    // Formulardaten aus dem sessionStorage laden, damit weiterhin angezeigt wird, was der Benutzer eingegeben hat
     useEffect(() => {
         const storedData = sessionStorage.getItem("formData");
         if (storedData) {
@@ -116,7 +116,7 @@ const Input = () => {
             <div className="grid grid-cols-2 gap-4">
                 <FormInput
                     label="Breitengrad"
-                    type="text" // Textfeld um alle Regeln zu erfüllen
+                    type="text" // Disclaimer: Textfeld um alle Regeln zu erfüllen (z.B. , und . Regeln oder auch keine Buchstaben)
                     steps="0.000001"
                     placeholder="in Dezimalgrad"
                     register={register("latitude", {
@@ -133,7 +133,7 @@ const Input = () => {
                 />
                 <FormInput
                     label="Längengrad"
-                    type="text"  // Textfeld um alle Regeln zu erfüllen
+                    type="text" // Disclaimer: Textfeld um alle Regeln zu erfüllen (z.B. , und . Regeln oder auch keine Buchstaben)
                     steps="0.000001"
                     placeholder="in Dezimalgrad"
                     register={register("longitude", {
