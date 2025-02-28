@@ -1,5 +1,5 @@
 /* Startseite der Anwendung mit Input-Formular */
-import Input from "../components/inputs";
+import Input from "../components/Inputs";
 
 const home = () => {
   return (

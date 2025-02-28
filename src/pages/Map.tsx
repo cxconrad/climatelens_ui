@@ -5,9 +5,9 @@ Rendert eine Sidebar (sidebar_stations.tsx) mit einzelnen StationCards (stationc
 */
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import WeatherMap from "../components/worldmap";
-import Sidebar from "../components/sidebar_stations";
-import Header from "../layouts/header";
+import WeatherMap from "../components/Worldmap";
+import Sidebar from "../components/Sidebar_stations";
+import Header from "../layouts/Header";
 
 export interface WeatherStation {
     id: number;

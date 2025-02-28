@@ -4,8 +4,8 @@ und bietet die Option, die Daten tabellarisch anzuzeigen.
 */
 import { useEffect } from "react";
 import { useLocation, useNavigate, Navigate } from "react-router-dom";
-import Header from "../layouts/header";
-import WeatherChart, { WeatherAPIResponse } from "../components/graph";
+import Header from "../layouts/Header";
+import WeatherChart, { WeatherAPIResponse } from "../components/Graph";
 
 interface Station {
   id: number;
