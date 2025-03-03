@@ -24,7 +24,7 @@ Wir setzen im Frontend folgende Technologien ein:
 - REST API: Vorgabe des Projekts für die Kommunikation zwischen Client und Server.
 
 ## Konsequenzen
-- Entwickler müssen sich an den **Utility-First** Ansatz von Tailwind CSS gewöhnen.
 - Die Architektur basiert auf **Client-Side Rendering (CSR)**.
 - Die Anwendung bleibt leichtgewichtig und schnell.
+- Ein Ausbau der Seite würde größeren Aufwand bedeuten.
 
