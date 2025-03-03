@@ -14,11 +14,11 @@ Die einzelnen Seiten bestehen aus *Komponenten*, die jeweils eigene Zustandslogi
 Neben der lokalen Zustandsverwaltung innerhalb der Komponenten (z. B. über useState) wird die Session Storage verwendet. Dies dient der speicherung von benutzerbezogene Daten und die Ergebnisse von API-Calls. Dies ermöglicht es, den Zustand zwischen den verschiedenen Seiten beizubehalten, ohne dass Daten bei der Navigation verloren gehen.
 
 **Service-Aufrufe und API-Calls:**
-In Service-Funktionen (siehe sendsearch.tsx und Fetchdata.tsx) werden API-Calls an das Backend ausgeführt, um die Wetterstationen und -daten zu erhalten. Die Ergebnisse dieser API-Calls werden anschließend verarbeitet und in den Session Storage abgelegt, sodass sie in den entsprechenden Komponenten weiterverwendet werden können.
+In Service-Funktionen (siehe [Sendsearch.tsx](../scr/services/Sendsearch.tsx) und [Fetchdata.tsx](../scr/services/Fetchdata.tsx)) werden API-Calls an das Backend ausgeführt, um die Wetterstationen und -daten zu erhalten. Die Ergebnisse dieser API-Calls werden anschließend verarbeitet und in den Session Storage abgelegt, sodass sie in den entsprechenden Komponenten weiterverwendet werden können.
 
 
 ## Technischer Aufbau
-Die Anwendung ist als **Single-Page-Application (SPA)** aufgebaut und umfasst vier zentrale Seiten:
+Die Anwendung ist als **Single-Page-Application (SPA)** aufgebaut und umfasst vier zentrale Seiten (die Dokumentation dies kann unter den Links abgerufen werden):
 
 - [Home](../doc/02_home.md): Startseite mit Eingabeformular für Suchparameter.
 - [Map](../doc/03_map.md): Anzeige einer interaktiven Karte mit Suchradius und Liste der gefundenen Wetterstationen.
@@ -27,8 +27,10 @@ Die Anwendung ist als **Single-Page-Application (SPA)** aufgebaut und umfasst vi
 
 In diesen Seiten werden unterstützende Komponenten, die die Funktionalität gewährleisten, verwendet. (z. B. Formulareingaben, Kartenanzeige, Station-Karten, Datenabruf).
 
+Für die Containerisierung wird Docker verwendet.
+
 ## Systemablauf und Datenfluss
-Folgendes Diagramm zeigt den gesamten Systemablauf und Datenfluss in der Anwendung aus Frontendperspektive.
+Folgendes Diagramm zeigt den gesamten Systemablauf und Datenfluss in der Anwendung aus Frontendperspektive. 
 <a href="https://github.com/cxconrad/climatelens_ui/blob/main/doc/img/Sequenz_Overview.png?raw=true" target="_blank">
     <img src="../doc/img/Sequenz_Overview.png" alt="Sequenz">
 </a>
