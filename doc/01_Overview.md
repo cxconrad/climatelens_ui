@@ -20,10 +20,10 @@ In Service-Funktionen (siehe [Sendsearch.tsx](../scr/services/Sendsearch.tsx) un
 ## Technischer Aufbau
 Die Anwendung ist als **Single-Page-Application (SPA)** aufgebaut und umfasst vier zentrale Seiten (die Dokumentation dies kann unter den Links abgerufen werden):
 
-- [Home](../doc/02_home.md): Startseite mit Eingabeformular für Suchparameter.
-- [Map](../doc/03_map.md): Anzeige einer interaktiven Karte mit Suchradius und Liste der gefundenen Wetterstationen.
-- [Plot](../doc/04_plot.md): Grafische Darstellung der Wetterdaten mittels interaktivem Diagramm.
-- [Table](../doc/05_table.md): Darstellung der Wetterdaten in einer dynamisch sortierbaren und anpassbaren Tabelle.
+- [Home](../doc/02_Home.md): Startseite mit Eingabeformular für Suchparameter.
+- [Map](../doc/03_Map.md): Anzeige einer interaktiven Karte mit Suchradius und Liste der gefundenen Wetterstationen.
+- [Plot](../doc/04_Plot.md): Grafische Darstellung der Wetterdaten mittels interaktivem Diagramm.
+- [Table](../doc/05_Table.md): Darstellung der Wetterdaten in einer dynamisch sortierbaren und anpassbaren Tabelle.
 
 In diesen Seiten werden unterstützende Komponenten, die die Funktionalität gewährleisten, verwendet. (z. B. Formulareingaben, Kartenanzeige, Station-Karten, Datenabruf).
 
