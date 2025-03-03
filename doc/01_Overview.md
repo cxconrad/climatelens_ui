@@ -1,7 +1,8 @@
 # Überblick des Frontend von ClimateLens
-Das **Frontend von Climate Lens** ist wie folgt aufgebaut:
-
-![Overview](../doc/img/Overview.png)
+"ClimateLens" ist eine Single-Page-Anwendung (SPA) zur interaktiven Visualisierung von Wetterdaten, die auf Basis benutzerdefinierter Suchkriterien wie geographischen Koordinaten, Suchradius und Zeitintervallen arbeitet. Die Anwendung wurde mit React und TypeScript entwickelt. Das **Frontend von Climate Lens** ist wie folgt aufgebaut:
+<br>
+<img src="../doc/img/Overview.png" alt="overview" width="400"/>
+<br>
 
 **React Router:** 
 Der *App-Router*, basierend auf React Router, ermöglicht die Navigation zwischen den einzelnen *Pages* (Home, Map, Plot, Table).
@@ -20,7 +21,7 @@ In Service-Funktionen (siehe sendsearch.tsx und Fetchdata.tsx) werden API-Calls 
 Die Anwendung ist als **Single-Page-Application (SPA)** aufgebaut und umfasst vier zentrale Seiten:
 
 - [Home](../doc/02_home.md): Startseite mit Eingabeformular für Suchparameter.
-- [ Map](../doc/03_map.md): Anzeige einer interaktiven Karte mit Suchradius und Liste der gefundenen Wetterstationen.
+- [Map](../doc/03_map.md): Anzeige einer interaktiven Karte mit Suchradius und Liste der gefundenen Wetterstationen.
 - [Plot](../doc/04_plot.md): Grafische Darstellung der Wetterdaten mittels interaktivem Diagramm.
 - [Table](../doc/05_table.md): Darstellung der Wetterdaten in einer dynamisch sortierbaren und anpassbaren Tabelle.
 
@@ -28,7 +29,7 @@ In diesen Seiten werden unterstützende Komponenten, die die Funktionalität gew
 
 ## Systemablauf und Datenfluss
 Folgendes Diagramm zeigt den gesamten Systemablauf und Datenfluss in der Anwendung aus Frontendperspektive.
-<a href="../doc/img/Sequenz_Overview.png" target="_blank">
+<a href="https://github.com/cxconrad/climatelens_ui/blob/main/doc/img/Sequenz_Overview.png?raw=true" target="_blank">
     <img src="../doc/img/Sequenz_Overview.png" alt="Sequenz">
 </a>
 
