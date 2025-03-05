@@ -26,7 +26,7 @@ interface WeatherMapProps {
     loading: boolean;
 }
 
-function worldmap({ formData, loading }: WeatherMapProps) {
+function Worldmap({ formData, loading }: WeatherMapProps) {
     const { longitude, latitude, radius, stations } = formData;
     const mapContainer = useRef<HTMLDivElement | null>(null);
     const mapInstance = useRef<maplibregl.Map | null>(null);
@@ -98,4 +98,4 @@ function worldmap({ formData, loading }: WeatherMapProps) {
     return <div ref={mapContainer} className="w-full h-full min-h-[800px] flex-1 p-5" />;
 };
 
-export default worldmap;
+export default Worldmap;

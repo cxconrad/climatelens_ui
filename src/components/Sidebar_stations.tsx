@@ -6,7 +6,7 @@ interface SidebarProps {
     loading: boolean;
 }
 
-const sidebar = ({ stations, loading }: SidebarProps) => {
+const Sidebar = ({ stations, loading }: SidebarProps) => {
     if (loading) {
         return (
             <div className="p-4 bg-gray-100 w-64 h-full">
@@ -36,4 +36,4 @@ const sidebar = ({ stations, loading }: SidebarProps) => {
     );
 };
 
-export default sidebar;
+export default Sidebar;

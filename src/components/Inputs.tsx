@@ -56,7 +56,6 @@ const FormInput = ({
     type,
     placeholder,
     register,
-    validation,
     error,
     steps,
     maxLength,

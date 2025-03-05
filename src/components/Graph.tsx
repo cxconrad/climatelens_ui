@@ -1,7 +1,6 @@
 import { useMemo, useEffect } from "react";
 import Plot from "react-plotly.js";
 
-// Struktur der API-Antwort für die Wetterdaten
 interface WeatherData {
     year: number;
     annual: {
@@ -32,7 +31,6 @@ export interface WeatherAPIResponse {
     data: WeatherData[];
 }
 
-// Datenstruktur für die Temperaturdaten
 interface TemperatureData {
     years: number[];
     maxTemperatures: number[];
@@ -45,7 +43,6 @@ interface TemperatureData {
     };
 }
 
-// Props für die WeatherChart-Komponente
 interface WeatherChartProps {
     data: WeatherAPIResponse;
     selectedStation?: string;

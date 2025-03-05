@@ -15,7 +15,7 @@ interface WeatherStationCard {
     station: WeatherStation;
 }
 
-function stationcard({ station }: WeatherStationCard) {
+function StationCard({ station }: WeatherStationCard) {
     const navigate = useNavigate();
 
     return (
@@ -41,4 +41,4 @@ function stationcard({ station }: WeatherStationCard) {
     );
 }
 
-export default stationcard;
+export default StationCard;
