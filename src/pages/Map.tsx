@@ -29,7 +29,7 @@ export interface LocationState {
     stations?: WeatherStation[];
 }
 
-const map = () => {
+const Map = () => {
     const navigate = useNavigate();
     const location = useLocation();
     let formData = location.state as LocationState | undefined;
@@ -83,4 +83,4 @@ const map = () => {
     );
 };
 
-export default map;
+export default Map;
