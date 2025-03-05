@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { FieldError, UseFormRegisterReturn } from "react-hook-form";
 import { handleSubmitForm, FormData } from "../services/Sendsearch";
 
-// Validierungsregeln für das Formular 
 const validationRules = {
     latitude: {
         required: "Breitengrad erforderlich",
@@ -41,7 +40,6 @@ const validationRules = {
     },
 };
 
-// Input-Komponente
 interface FormInputProps {
     label: string;
     type: string;
@@ -107,7 +105,6 @@ const Input = () => {
         }
     }, [setValue]);
 
-    // Formular mit den Input-Feldern
     return (
         <form
             onSubmit={handleSubmit((data) => handleSubmitForm(data, navigate))}
