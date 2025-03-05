@@ -1,5 +1,5 @@
 /* 
-Wird im Formular (inputs.tsx) aufgerufen, wenn die Benutzer:in auf „Wetterstation suchen” klickt.
+Wird durch das Formular (inputs.tsx) aufgerufen, wenn der Benutzer auf „Wetterstation suchen” klickt.
 Schickt die Formulardaten an das Backend (GET-Request an /stations-query).
 Speichert bei erfolgreicher Antwort die zurückgelieferten Stationen in sessionStorage.
 Leitet anschließend zur Kartenansicht (/map) weiter.
