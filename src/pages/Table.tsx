@@ -22,7 +22,7 @@ interface Locations {
     };
 }
 
-const table = () => {
+const Table = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -142,4 +142,4 @@ const table = () => {
     );
 };
 
-export default table;
+export default Table;
