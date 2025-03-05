@@ -51,7 +51,6 @@ interface WeatherChartProps {
     selectedStation?: string;
 }
 
-// Farben für die Jahreszeiten
 const getSeasonColor = (season: string, type: "min" | "max"): string => {
     const colors: Record<string, { min: string; max: string }> = {
         winter: { min: "#4e95d9", max: "#83cbeb" },
@@ -62,7 +61,6 @@ const getSeasonColor = (season: string, type: "min" | "max"): string => {
     return colors[season]?.[type] || "#000000";
 };
 
-// Mapping von englischen zu deutschen Jahreszeiten, damit das Frontend die richtigen Jahreszeiten anzeigt
 const seasonNames: Record<string, string> = {
     winter: "Winter",
     summer: "Sommer",
@@ -70,7 +68,6 @@ const seasonNames: Record<string, string> = {
     spring: "Frühling",
 };
 
-// Funktion, um Wetterdaten zu protokollieren
 const logWeatherData = (data: WeatherAPIResponse) => {
     const logsKey = "apiCallLogs";
     const existingLogs = sessionStorage.getItem(logsKey);
@@ -84,7 +81,6 @@ const logWeatherData = (data: WeatherAPIResponse) => {
     sessionStorage.setItem(logsKey, JSON.stringify(logs));
 };
 
-// Komponente für die Wetterdaten
 const WeatherChart = ({ data, selectedStation }: WeatherChartProps) => {
     useEffect(() => {
         if (data) {
