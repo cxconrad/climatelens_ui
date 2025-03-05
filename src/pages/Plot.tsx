@@ -22,7 +22,7 @@ interface Locations {
   station: Station;
 }
 
-const graph = () => {
+const Graph = () => {
   const location = useLocation();
   const navigate = useNavigate();
   let state = location.state as Locations | null;
@@ -101,4 +101,4 @@ const graph = () => {
   );
 };
 
-export default graph;
+export default Graph;
