@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-// Definition von TemperatureRange und TemperatureData
 interface TemperatureRange {
     min: number;
     max: number;
@@ -15,12 +14,11 @@ interface TemperatureData {
     winter: TemperatureRange;
 }
 
-// Definition der Props für die Komponente, damit die Spalten ausgewählt werden können
 interface TemperatureTableProps {
     visibleColumns: string[];
 }
 
-// Definition der Tabelle
+// Daten werden über SessionStorage abgerufen
 const Datatable = ({ visibleColumns }: TemperatureTableProps) => {
     const [data, setData] = useState<TemperatureData[]>(() => {
         const storedData = sessionStorage.getItem("weatherData");
@@ -42,13 +40,12 @@ const Datatable = ({ visibleColumns }: TemperatureTableProps) => {
     const [sortColumn, setSortColumn] = useState<string>('year');
     const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
 
-    // Funktion, damit leere Werte korrekt angeziegt werden
+    //  Leere Werte werden als '-' dargestellt.
     const getNestedValue = (obj: any, columnKey: string): any => {
         const value = columnKey.split('.').reduce((o, key) => (o ? o[key] : undefined), obj);
         return value !== undefined && value !== null ? value : "-";
     };
 
-    // Funktion, um die Tabelle sortiert werden kann
     const handleSort = (column: string) => {
         const newSortOrder = sortColumn === column && sortOrder === 'asc' ? 'desc' : 'asc';
         setSortColumn(column);
@@ -72,16 +69,13 @@ const Datatable = ({ visibleColumns }: TemperatureTableProps) => {
         setData(sortedData);
     };
 
-    // Wenn die Daten noch nicht geladen wurden, wird eine Ladeanimation angezeigt
     if (loading) {
         return <div>Laden...</div>;
     }
-    // Error handling
     if (error) {
         return <div>Fehler: {error}</div>;
     }
 
-    // Spaltennamen definieren
     const columns = [
         { key: 'annual.max', label: 'Max' },
         { key: 'annual.min', label: 'Min' },
@@ -95,7 +89,6 @@ const Datatable = ({ visibleColumns }: TemperatureTableProps) => {
         { key: 'winter.min', label: 'Winter Min' },
     ];
 
-    // Tabelle rendern
     return (
         <div className="absolute h-4/5 overflow-y-auto sm:rounded-lg">
             <table className="w-full text-sm text-left text-gray-500">
