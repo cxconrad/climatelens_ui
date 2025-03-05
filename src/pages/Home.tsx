@@ -1,7 +1,7 @@
 /* Startseite der Anwendung mit Input-Formular */
 import Input from "../components/Inputs";
 
-const home = () => {
+const Home = () => {
   return (
     <div className="min-h-screen flex flex-row items-center justify-center overflow-x-hidden">
       <header className="text-white py-10 text-center all">
@@ -29,4 +29,4 @@ const home = () => {
   );
 };
 
-export default home;
+export default Home;
