@@ -11,7 +11,7 @@ Der *App-Router*, basierend auf React Router, ermöglicht die Navigation zwische
 Die einzelnen Seiten bestehen aus *Komponenten*, die jeweils eigene Zustandslogik implementiert haben. *Hooks* wie useEffect werden genutzt, um beim Laden der Komponente Initialisierungen (z. B. Datenabrufe oder das Setzen von Session Storage-Werten) durchzuführen.
 
 **State Management und Session Storage:**
-Neben der lokalen Zustandsverwaltung innerhalb der Komponenten (z. B. über useState) wird die Session Storage verwendet. Dies dient der speicherung von benutzerbezogene Daten und die Ergebnisse von API-Calls. Dies ermöglicht es, den Zustand zwischen den verschiedenen Seiten beizubehalten, ohne dass Daten bei der Navigation verloren gehen.
+Neben der lokalen Zustandsverwaltung innerhalb der Komponenten (z. B. über useState) wird die Session Storage verwendet. Dies dient der Speicherung von benutzerbezogene Daten und den Ergebnisse der API-Calls. Dies ermöglicht es, den Zustand zwischen den verschiedenen Seiten beizubehalten, ohne dass Daten bei der Navigation verloren gehen.
 
 **Service-Aufrufe und API-Calls:**
 In Service-Funktionen (siehe [Sendsearch.tsx](../scr/services/Sendsearch.tsx) und [Fetchdata.tsx](../scr/services/Fetchdata.tsx)) werden API-Calls an das Backend ausgeführt, um die Wetterstationen und -daten zu erhalten. Die Ergebnisse dieser API-Calls werden anschließend verarbeitet und in den Session Storage abgelegt, sodass sie in den entsprechenden Komponenten weiterverwendet werden können.
