@@ -33,6 +33,7 @@ Für die Containerisierung wird Docker verwendet.
 
 ## Systemablauf und Datenfluss
 Folgendes Diagramm zeigt den gesamten Systemablauf und Datenfluss in der Anwendung aus Frontendperspektive. 
+
 <a href="https://raw.githubusercontent.com/cxconrad/climatelens_ui/refs/heads/main/doc/img/Sequenz_Overview.png" target="_blank">
     <img src="../doc/img/Sequenz_Overview.png" alt="Sequenz">
 </a>
