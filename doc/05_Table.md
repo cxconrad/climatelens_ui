@@ -1,5 +1,5 @@
 # Erläuterungen zur Seite "Table (table.tsx)"
-*Datei:* [Table](../src/pages/table.tsx)  <br>
+*Datei:* [Table](../src/pages/Table.tsx)  <br>
 
 ## Funktionalitäten und Aufgabe
 **Datenquelle:**
@@ -12,7 +12,8 @@
 
 **Navigation:** Ein „Zurück“-Button führt zur Plot-Seite zurück, sodass der Nutzer zwischen der grafischen und tabellarischen Ansicht wechseln kann.
 
-Der Aufbau und die grundlegende Funktion der Seite ist wie folgt, darzustellen:
+Im Folgenden werden der graphische Aufbau sowie die grundlegende Funktion der Seite dargestellt:
+
 
 ![Overview](../doc/img/Table_Page.png)
 
@@ -21,7 +22,7 @@ Der Aufbau und die grundlegende Funktion der Seite ist wie folgt, darzustellen:
 
 ## Verwendete Komponenten
 Hervorgehend aus der Aufbauansicht werden auf der Seite folgenden Komponenten verwendet:
-- [Datatable](../src/components/datatable.tsx)
-- [Header](../src/layouts/header.tsx)
+- [Datatable](../src/components/Datatable.tsx)
+- [Header](../src/layouts/Header.tsx)
 
 
