@@ -27,10 +27,12 @@ Die Anzeige erfolgt über die Komponente  [Worldmap.tsx.](../src/components/Worl
 - Enthalten sind Details wie Name, Koordinaten, Entfernung und ein Button, der den Datenabruf (über [Fetchdata.tsx](../src/services/Fetchdata.tsx)) initiiert.<br>
 
 **- Navigation:**
-Ein „Zurück“-Button ermöglicht es dem Nutzer, wieder zur Home-Seite zurückzukehren.
+Ein „Zurück“-Button ermöglicht es dem Nutzer, wieder zur [Home-Seite](../src/pages/Home.tsx) zurückzukehren.
 
-Folgende Grafik dient der Veranschaulichung der Struktur:
+Im Folgenden werden der graphische Aufbau sowie die grundlegende Funktion der Seite dargestellt.
+
 ![Overview](../doc/img/Map_Page.png)
+
 ## Technische Details:
 
 - **MapLibre GL:** Wird genutzt, um die Weltkarte zu rendern und interaktive Funktionen wie Navigation und Marker zu ermöglichen.
@@ -39,9 +41,9 @@ Folgende Grafik dient der Veranschaulichung der Struktur:
 ## Verwendete Komponenten
 Hervorgehend aus der Aufbauansicht werden auf der Seite folgenden Komponenten verwendet:
 
-- [Sidebar-Stations](../src/components/sidebar_stations.tsx)
-- [Station Card](../src/components/stationcard.tsx)
-- [World Map](../src/components/worldmap.tsx)
+- [Sidebar-Stations](../src/components/Sidebar_stations.tsx)
+- [Station Card](../src/components/Stationcard.tsx)
+- [World Map](../src/components/Worldmap.tsx)
 
 Im Rahmen der Abfrage nach Wetterdaten wird folgender Service aufgerufen: 
-- [Fetch Data](../src/services/fetchdata.tsx)
+- [Fetch Data](../src/services/Fetchdata.tsx)
