@@ -17,14 +17,13 @@ Das Projekt ist ein kleines Universitätsprojekt, bei dem eine moderne und effiz
 ## Entscheidung
 Wir setzen im Frontend folgende Technologien ein:
 
-- Vite: Schnelles Build-Tool für eine effiziente Entwicklungsumgebung und optimale Performance.
-- React: Weit verbreitetes, komponentenbasiertes JavaScript-Framework für flexible UI-Entwicklung.
-- TypeScript: Statistisch typisierte Erweiterung von JavaScript zur Verbesserung der Code-Qualität und Wartbarkeit.
-- Tailwind CSS: Utility-First CSS-Framework, das schnelles Styling ermöglicht, ohne zusätzliche CSS-Dateien schreiben zu müssen.
-- REST API: Vorgabe des Projekts für die Kommunikation zwischen Client und Server.
+- **Vite:** Schnelles Build-Tool für eine effiziente Entwicklungsumgebung und optimale Performance.
+- **React:** Weit verbreitetes, komponentenbasiertes JavaScript-Framework für flexible UI-Entwicklung.
+- **TypeScript:** Statistisch typisierte Erweiterung von JavaScript zur Verbesserung der Code-Qualität.
+- **Tailwind CSS:** Utility-First CSS-Framework, das schnelles Styling ermöglicht, ohne zusätzliche CSS-Dateien schreiben zu müssen.
+- **REST API:** Vorgabe des Projekts für die Kommunikation zwischen Client und Server.
 
 ## Konsequenzen
-- Die Architektur basiert auf **Client-Side Rendering (CSR)**.
 - Die Anwendung bleibt leichtgewichtig und schnell.
 - Ein Ausbau der Seite würde größeren Aufwand bedeuten.
 
