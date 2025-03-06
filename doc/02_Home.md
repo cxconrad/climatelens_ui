@@ -31,7 +31,7 @@ Zus√§tzlich wird ein Info-Tooltip angeboten, der die Eingabe in Dezimalgrad erl√
 
 
 ## Verwendete Komponenten
-Hervorgehend aus der Aufbauansicht werden auf der Seite folgenden Komponenten verwendet:
+Hervorgehend aus der Aufbauansicht werden auf der Seite folgende Komponenten verwendet:
 
 - [Input-Form](../src/components/Inputs.tsx)
 
