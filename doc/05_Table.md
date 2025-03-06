@@ -21,7 +21,7 @@ Im Folgenden werden der graphische Aufbau sowie die grundlegende Funktion der Se
 - **React State:** Lokale States verwalten Ladezustände, Sortierkriterien und die Sichtbarkeit einzelner Spalten.
 
 ## Verwendete Komponenten
-Hervorgehend aus der Aufbauansicht werden auf der Seite folgenden Komponenten verwendet:
+Hervorgehend aus der Aufbauansicht werden auf der Seite folgende Komponenten verwendet:
 - [Datatable](../src/components/Datatable.tsx)
 - [Header](../src/layouts/Header.tsx)
 
