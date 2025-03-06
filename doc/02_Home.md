@@ -4,12 +4,14 @@
 
 **Funktionalität und Aufgaben:**
 - **Einstiegspunkt:** Die Home-Seite stellt den Einstieg in die Applikation dar. Sie zeigt den Titel „ClimateLens“ sowie einen Slogan an („Wetterstationen finden – Trends entdecken“).
+  
 - **Eingabeformular:**
 Das Formular, realisiert über die Komponente Inputs.tsx, ermöglicht die Eingabe von Suchparametern:
     - Geographische Koordinaten 
     - Suchradius in Kilometern
     - Anzahl der anzuzeigenden Wetterstationen
     - Zeitspanne definiert durch Start- und Endjahr
+      
 - **Formular-Submission (Integration von sendsearch.tsx):**
     - Beim Klick auf „Wetterstation suchen“ wird die Funktion handleSubmitForm aus [Sendsearch.tsx](../src/services/Sendsearch.tsx] aufgerufen. Diese führt folgende Schritte durch:
     - Persistenz der Formulardaten: Die eingegebenen Werte werden im sessionStorage unter dem Schlüssel "formData" gespeichert.
