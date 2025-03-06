@@ -14,7 +14,7 @@ Die einzelnen Seiten bestehen aus *Komponenten*, die jeweils eigene Zustandslogi
 Neben der lokalen Zustandsverwaltung innerhalb der Komponenten (z. B. über useState) wird die Session Storage verwendet. Dies dient der Speicherung von benutzerbezogene Daten und den Ergebnisse der API-Calls. Dies ermöglicht es, den Zustand zwischen den verschiedenen Seiten beizubehalten, ohne dass Daten bei der Navigation verloren gehen.
 
 **Service-Aufrufe und API-Calls:**
-In Service-Funktionen (siehe [Sendsearch.tsx](../scr/services/Sendsearch.tsx) und [Fetchdata.tsx](../scr/services/Fetchdata.tsx)) werden API-Calls an das Backend ausgeführt, um die Wetterstationen und -daten zu erhalten. Die Ergebnisse dieser API-Calls werden anschließend verarbeitet und in den Session Storage abgelegt, sodass sie in den entsprechenden Komponenten weiterverwendet werden können.
+In Service-Funktionen (siehe [Sendsearch.tsx](../src/services/Sendsearch.tsx) und [Fetchdata.tsx](../src/services/Fetchdata.tsx)) werden API-Calls an das Backend ausgeführt, um die Wetterstationen und -daten zu erhalten. Die Ergebnisse dieser API-Calls werden anschließend verarbeitet und in den Session Storage abgelegt, sodass sie in den entsprechenden Komponenten weiterverwendet werden können.
 
 
 ## Technischer Aufbau
