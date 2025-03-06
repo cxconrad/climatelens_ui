@@ -31,7 +31,7 @@ Im Folgenden werden der graphische Aufbau sowie die grundlegende Funktion der Se
 **Datenstruktur:** Typisierte Interfaces (z. B WeatherAPIResponse, WeatherData) garantieren eine saubere Datenstruktur und erleichtern die Weiterverarbeitung im Diagramm.
 
 ## Verwendete Komponenten
-Hervorgehend aus der Aufbauansicht werden auf der Seite folgenden Komponenten verwendet:
+Hervorgehend aus der Aufbauansicht werden auf der Seite folgende Komponenten verwendet:
 - [Graph.tsx](../src/components/Graph.tsx)
 - [Header.tsx](../src/layouts/Header.tsx)
 
