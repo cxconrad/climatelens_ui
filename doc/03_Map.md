@@ -39,7 +39,7 @@ Im Folgenden werden der graphische Aufbau sowie die grundlegende Funktion der Se
 - **Turf.js:** Erzeugt den GeoJSON-Kreis für den Suchradius.
 
 ## Verwendete Komponenten
-Hervorgehend aus der Aufbauansicht werden auf der Seite folgenden Komponenten verwendet:
+Hervorgehend aus der Aufbauansicht werden auf der Seite folgende Komponenten verwendet:
 
 - [Sidebar-Stations](../src/components/Sidebar_stations.tsx)
 - [Station Card](../src/components/Stationcard.tsx)
