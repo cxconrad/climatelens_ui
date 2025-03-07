@@ -1,6 +1,7 @@
 # Überblick des Frontend von ClimateLens
 "ClimateLens" ist eine Single-Page-Anwendung (SPA) zur interaktiven Visualisierung von Wetterdaten, die auf Basis benutzerdefinierter Suchkriterien wie geographischen Koordinaten, Suchradius und Zeitintervallen arbeitet. Die Anwendung wurde mit React und TypeScript entwickelt. Das **Frontend von Climate Lens** ist wie folgt aufgebaut:
 <br>
+<br>
 <img src="../doc/img/Overview.png" alt="overview" width="400"/>
 <br>
 
@@ -11,7 +12,7 @@ Der *App-Router*, basierend auf React Router, ermöglicht die Navigation zwische
 Die einzelnen Seiten bestehen aus *Komponenten*, die jeweils eigene Zustandslogik implementiert haben. *Hooks* wie useEffect werden genutzt, um beim Laden der Komponente Initialisierungen (z. B. Datenabrufe oder das Setzen von Session Storage-Werten) durchzuführen.
 
 **State Management und Session Storage:**
-Neben der lokalen Zustandsverwaltung innerhalb der Komponenten (z. B. über useState) wird die Session Storage verwendet. Dies dient der Speicherung von benutzerbezogene Daten und den Ergebnisse der API-Calls. Dies ermöglicht es, den Zustand zwischen den verschiedenen Seiten beizubehalten, ohne dass Daten bei der Navigation verloren gehen.
+Neben der lokalen Zustandsverwaltung innerhalb der Komponenten (z. B. über useState) wird die Session Storage verwendet. Dies dient der Speicherung von benutzerbezogene Daten und den Ergebnissen der API-Calls. Dies ermöglicht es, den Zustand zwischen den verschiedenen Seiten beizubehalten, ohne dass Daten bei der Navigation verloren gehen.
 
 **Service-Aufrufe und API-Calls:**
 In Service-Funktionen (siehe [Sendsearch.tsx](../src/services/Sendsearch.tsx) und [Fetchdata.tsx](../src/services/Fetchdata.tsx)) werden API-Calls an das Backend ausgeführt, um die Wetterstationen und -daten zu erhalten. Die Ergebnisse dieser API-Calls werden anschließend verarbeitet und in den Session Storage abgelegt, sodass sie in den entsprechenden Komponenten weiterverwendet werden können.
