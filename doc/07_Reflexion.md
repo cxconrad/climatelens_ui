@@ -17,4 +17,4 @@ Ziel dieser Reflexion ist es, den bestehenden Code kritisch zu evaluieren und po
 - Die Einhaltung der Clean-Code-Prinzipien ist derzeit nur eingeschränkt gegeben. Ursache hierfür sind unter anderem begrenzte Kenntnisse der Entwicklerin hinsichtlich spezifischer Methoden. Zukünftige Verbesserungen könnten daher schrittweise und unter Beachtung der bestehenden Funktionalität umgesetzt werden.
 
 ## Fazit
-Die Entwicklung des ClimateLens-Frontends war ein komplexes Projekt, dass die Wichtigkeit von Methoden und Richtlinen der Programmiersprachen sowie Zusammenarbeit in Entwicklerteams gezeigt hat. Trotz der Herausforderungen und funktioniert das Frontend erfolgreich, wobei noch Verbesserungspotential in den oben genannten Bereichen ist.
+Die Entwicklung des ClimateLens-Frontends war ein komplexes Projekt, dass die Wichtigkeit von Methoden und Richtlinen der Programmiersprachen sowie die Zusammenarbeit in Entwicklerteams gezeigt hat. Trotz der Herausforderungen funktioniert das Frontend erfolgreich, wobei noch Verbesserungspotential in den oben genannten Bereichen ist.
