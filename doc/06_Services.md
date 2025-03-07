@@ -30,7 +30,7 @@ Die Services dienen der Kommunikation und Verarbeitung der Daten vom Backend. Si
 **Verwendete Bibliotheken/Frameworks:**
 - React Router: Nutzung von NavigateFunction zur Navigation.
 - Fetch API: Zur Durchführung der HTTP-Anfragen an das Backend.
-- SessionStorage: Zum Zwischenspeichern API-Daten.
+- SessionStorage: Zum Zwischenspeichern von API-Daten.
 
 **Event-Handler & Callbacks:**
 - Die Funktion fetchData dient als Callback und übernimmt Parameter wie stationId, navigate und das station-Objekt.
