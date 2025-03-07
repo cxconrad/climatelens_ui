@@ -12,11 +12,11 @@ Die Dokumentation ist unter folgenden Link vorzufinden: [Dokumentation](./doc/01
 - Windows 11
 ### Anwendung starten (mit PowerShell)
 ```
-cd ~
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/FumiZwerg/ClimateLens-Backend/main/docker-compose.yml" -OutFile "docker-compose.yml"
-docker compose up -d
-Start-Sleep -Seconds 120
-Start-Process "http://localhost:4173"
+cd ~;
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/FumiZwerg/ClimateLens-Backend/main/docker-compose.yml" -OutFile "docker-compose.yml";
+docker compose up -d;
+Start-Sleep -Seconds 60;
+Start-Process "http://localhost:4173";
 ```
 ### Anwendung beenden (mit PowerShell)
 
