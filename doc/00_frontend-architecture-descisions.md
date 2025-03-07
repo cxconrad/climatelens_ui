@@ -1,4 +1,3 @@
-
 # ADR 002: Auswahl der Frontend-Technologien
 
 ## Datum
