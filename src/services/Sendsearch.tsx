@@ -45,12 +45,21 @@ export const handleSubmitForm = async (data: FormData, navigate: NavigateFunctio
         navigate("/map", { state: { ...data, stations } });
 
     } catch (error) {
-        if (error instanceof Error && error.name === "AbortError") {
-            console.error("Fehler: Der Request hat zu lange gedauert und wurde abgebrochen.");
-            alert("Die Anfrage hat zu lange gedauert. Bitte versuchen Sie es später erneut.");
+        if (error instanceof Error) {
+            if (error.name === "AbortError") {
+                console.error("Fehler: Der Request hat zu lange gedauert und wurde abgebrochen.");
+                alert("Die Anfrage hat zu lange gedauert. Bitte versuchen Sie es später erneut.");
+            } else if (error.message.includes("Failed to fetch") || error.message.includes("NetworkError") || error.message.includes("ERR_CONNECTION_REFUSED")) {
+                console.error("Fehler: Verbindung zum Server konnte nicht hergestellt werden.");
+                alert("Verbindung zum Server fehlgeschlagen. Bitte prüfen Sie, ob der Server läuft und versuchen Sie es erneut.");
+            } else {
+                console.error("Fehler beim Verarbeiten des Formulars:", error);
+                alert(error.message);
+            }
         } else {
-            console.error("Fehler beim Verarbeiten des Formulars:", error);
-            alert(error instanceof Error ? error.message : "Ein unbekannter Fehler ist aufgetreten");
+            console.error("Unbekannter Fehler:", error);
+            alert("Ein unbekannter Fehler ist aufgetreten.");
         }
     }
+    
 };

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { FieldError, UseFormRegisterReturn } from "react-hook-form";
@@ -40,6 +40,7 @@ const validationRules = {
     },
 };
 
+
 interface FormInputProps {
     label: string;
     type: string;
@@ -67,7 +68,7 @@ const FormInput = ({
             placeholder={placeholder}
             step={steps}
             max={maxLength ? 9999 : undefined}
-            pattern="[0-9,.\-]*" // nur Ziffern, Komma, Punkt und Bindestrich erlauben
+            pattern="[0-9,.\-]*"
             onInput={(e) => {
                 const target = e.target as HTMLInputElement;
                 target.value = target.value.replace(/[^0-9,.\-]/g, "");
@@ -83,6 +84,7 @@ const FormInput = ({
 );
 
 const Input = () => {
+    const [loading, setLoading] = useState(false);
     const {
         register,
         handleSubmit,
@@ -92,7 +94,6 @@ const Input = () => {
 
     const navigate = useNavigate();
 
-    // Formulardaten aus dem sessionStorage laden, damit weiterhin angezeigt wird, was der Benutzer eingegeben hat
     useEffect(() => {
         const storedData = sessionStorage.getItem("formData");
         if (storedData) {
@@ -104,15 +105,27 @@ const Input = () => {
         }
     }, [setValue]);
 
+    const onSubmit = async (data: FormData) => {
+        setLoading(true);
+        try {
+            await handleSubmitForm(data, navigate);
+        } catch (error) {
+            // Fehlerbehandlung hier, falls nötig
+            console.error("Submit Fehler:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <form
-            onSubmit={handleSubmit((data) => handleSubmitForm(data, navigate))}
+            onSubmit={handleSubmit(onSubmit)}
             className="max-w-md mx-auto bg-slate-900 p-6 rounded-lg shadow-indigo-500/50 space-y-4 drop-shadow-md"
         >
             <div className="grid grid-cols-2 gap-4">
                 <FormInput
                     label="Breitengrad"
-                    type="text" // Disclaimer: Textfeld um alle Regeln zu erfüllen (z.B. , und . Regeln oder auch keine Buchstaben)
+                    type="text"
                     steps="0.000001"
                     placeholder="in Dezimalgrad"
                     register={register("latitude", {
@@ -129,7 +142,7 @@ const Input = () => {
                 />
                 <FormInput
                     label="Längengrad"
-                    type="text" // Disclaimer: Textfeld um alle Regeln zu erfüllen (z.B. , und . Regeln oder auch keine Buchstaben)
+                    type="text"
                     steps="0.000001"
                     placeholder="in Dezimalgrad"
                     register={register("longitude", {
@@ -189,10 +202,17 @@ const Input = () => {
             </div>
 
             <button
-                type="submit"
-                className="w-full py-2 px-4 text-white !bg-purple-700 hover:!bg-purple-600 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
-                Wetterstation suchen
+            type="submit"
+            disabled={loading}
+            className="w-full py-2 px-4 text-white !bg-purple-700 hover:bg-purple-600 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
+            >
+            {loading ? (
+                <div className="flex justify-center items-center">
+                <div className="w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                </div>
+                    ) : ("Wetterstation suchen")}
             </button>
+
         </form>
     );
 };
