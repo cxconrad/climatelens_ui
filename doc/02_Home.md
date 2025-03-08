@@ -14,12 +14,14 @@ Das Formular, realisiert über die Komponente Inputs.tsx, ermöglicht die Eingab
       
 - **Formular-Submission (Integration von sendsearch.tsx):**
     - Beim Klick auf „Wetterstation suchen“ wird die Funktion handleSubmitForm aus [Sendsearch.tsx](../src/services/Sendsearch.tsx] aufgerufen. Diese führt folgende Schritte durch:
-    - Persistenz der Formulardaten: Die eingegebenen Werte werden im sessionStorage unter dem Schlüssel "formData" gespeichert.
-    - API-Aufruf: Es wird ein GET-Request an den Endpunkt /stations-query gesendet, wobei die Formulardaten als Query-Parameter übermittelt werden.
-    - Verarbeitung der Antwort: Bei erfolgreicher Antwort werden die zurückgelieferten Stationen in sessionStorage unter dem Schlüssel "stations" abgelegt.
-    - Navigation: Anschließend wird der Nutzer über navigate zur [Map-Seite](../src/pages/Map.tsx) weitergeleitet, wobei sowohl die Formulardaten als auch die ermittelten Wetterstationen als Zustandsdaten übergeben werden.
+      - Persistenz der Formulardaten: Die eingegebenen Werte werden im sessionStorage unter dem Schlüssel "formData" gespeichert.
+      - API-Aufruf: Es wird ein GET-Request an den Endpunkt /stations-query gesendet, wobei die Formulardaten als Query-Parameter übermittelt werden.
+      - Verarbeitung der Antwort: Bei erfolgreicher Antwort werden die zurückgelieferten Stationen in sessionStorage unter dem Schlüssel "stations" abgelegt.
+      - Navigation: Anschließend wird der Nutzer über navigate zur [Map-Seite](../src/pages/Map.tsx) weitergeleitet, wobei sowohl die Formulardaten als auch die ermittelten Wetterstationen als Zustandsdaten übergeben werden.
 
-Folgende Grafik dient der Veranschaulichung der Struktur: ![Overview](../doc/img/Home_Page.png)
+Folgende Grafik dient der Veranschaulichung der Struktur:
+
+![Overview](../doc/img/Home_Page.png)
 
 ## Technische Details:
 
