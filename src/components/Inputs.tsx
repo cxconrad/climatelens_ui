@@ -110,7 +110,6 @@ const Input = () => {
         try {
             await handleSubmitForm(data, navigate);
         } catch (error) {
-            // Fehlerbehandlung hier, falls nötig
             console.error("Submit Fehler:", error);
         } finally {
             setLoading(false);
