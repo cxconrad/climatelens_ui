@@ -15,18 +15,19 @@ Die Anzeige erfolgt über die Komponente  [Worldmap.tsx.](../src/components/Worl
         - *Suchmarker:* Ein roter Marker kennzeichnet den eingegebenen Standort.
         - *Suchradius:* Ein Kreis (erstellt mit Turf.js) stellt den Suchbereich dar. Dieser wird als GeoJSON-Objekt in MapLibre GL eingebunden.
         - Wetterstationen: Alle gefundenen Wetterstationen werden als Marker (blau) dargestellt. Bei Klick auf einen Marker öffnet sich ein Popup mit folgenden Informationen:
+          
             - Stationname
             - Entfernung
             <br>
 
-**- Sidebar:**
+- **Sidebar:**
 Über die Komponente [Sidebar_stations.tsx](../src/components/Sidebar_stations.tsx) wird eine Seitenleiste eingeblendet, in der die einzelnen Wetterstationen aufgelistet werden. 
 
-**- Stationcards:**
-- Jede Station wird in einer eigenen StationCard (implementiert in [Stationcard.tsx](../src/components/Stationcard.tsx)) angezeigt.
-- Enthalten sind Details wie Name, Koordinaten, Entfernung und ein Button, der den Datenabruf (über [Fetchdata.tsx](../src/services/Fetchdata.tsx)) initiiert.<br>
+- **Stationcards:**
+    - Jede Station wird in einer eigenen StationCard (implementiert in [Stationcard.tsx](../src/components/Stationcard.tsx)) angezeigt.
+    - Enthalten sind Details wie Name, Koordinaten, Entfernung und ein Button, der den Datenabruf (über [Fetchdata.tsx](../src/services/Fetchdata.tsx)) initiiert.<br>
 
-**- Navigation:**
+- **Navigation:**
 Ein „Zurück“-Button ermöglicht es dem Nutzer, wieder zur [Home-Seite](../src/pages/Home.tsx) zurückzukehren.
 
 Im Folgenden werden der graphische Aufbau sowie die grundlegende Funktion der Seite dargestellt.
