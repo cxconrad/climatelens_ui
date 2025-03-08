@@ -14,7 +14,7 @@ Die Anzeige erfolgt über die Komponente  [Worldmap.tsx.](../src/components/Worl
     - **Kartenelemente:**
         - *Suchmarker:* Ein roter Marker kennzeichnet den eingegebenen Standort.
         - *Suchradius:* Ein Kreis (erstellt mit Turf.js) stellt den Suchbereich dar. Dieser wird als GeoJSON-Objekt in MapLibre GL eingebunden.
-        - Wetterstationen: Alle gefundenen Wetterstationen werden als Marker (blau) dargestellt. Bei Klick auf einen Marker öffnet sich ein Popup mit folgenden Informationen:
+        - *Wetterstationen:* Alle gefundenen Wetterstationen werden als Marker (blau) dargestellt. Bei Klick auf einen Marker öffnet sich ein Popup mit folgenden Informationen:
           
             - Stationname
             - Entfernung
