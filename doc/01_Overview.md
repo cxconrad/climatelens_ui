@@ -9,7 +9,7 @@
 Der *App-Router*, basierend auf React Router, ermöglicht die Navigation zwischen den einzelnen *Pages* (Home, Map, Plot, Table).
 
 **Komponentenstruktur und Hooks:**
-Die einzelnen Seiten bestehen aus *Komponenten*, die jeweils eigene Zustandslogik implementiert haben. *Hooks* wie useEffect werden genutzt, um beim Laden der Komponente Initialisierungen (z. B. Datenabrufe oder das Setzen von Session Storage-Werten) durchzuführen.
+Die einzelnen Seiten bestehen aus *Komponenten*, die jeweils eigene Zustandslogiken implementiert haben. *Hooks* wie useEffect werden genutzt, um beim Laden der Komponente Initialisierungen (z. B. Datenabrufe oder das Setzen von Session Storage-Werten) durchzuführen.
 
 **State Management und Session Storage:**
 Neben der lokalen Zustandsverwaltung innerhalb der Komponenten (z. B. über useState) wird die Session Storage verwendet. Dies dient der Speicherung von benutzerbezogene Daten und den Ergebnissen der API-Calls. Dies ermöglicht es, den Zustand zwischen den verschiedenen Seiten beizubehalten, ohne dass Daten bei der Navigation verloren gehen.
